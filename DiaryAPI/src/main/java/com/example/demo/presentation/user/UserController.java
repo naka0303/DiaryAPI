@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.application.user.dto.UserDto;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.infrastructure.user.service.UserService;
 
@@ -25,14 +26,15 @@ public class UserController {
 	 * @return ユーザー情報
 	 */
 	@GetMapping("/v1/users")
-	public List<User> findAll() {
-		return userService.findAll();
+	public ResponseEntity<List<UserDto>> findAll() {
+		List<UserDto> userDto = userService.findAll();
+		
+		return new ResponseEntity(userDto, HttpStatus.OK);
 	}
 	
 	/**
 	 * 新規ユーザーを登録する
 	 * @param user
-	 * @return
 	 */
 	@PostMapping("/v1/users")
 	public ResponseEntity<User> createUser(

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.application.user.dto.UserDto;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.mapper.UserQueryMapper;
 
@@ -19,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
 	 * ユーザー情報一覧を取得する
 	 * @return ユーザー情報
 	 */
-	public List<User> findAll() {
+	public List<UserDto> findAll() {
 		return userQueryMapper.findAll();
 	}
 
