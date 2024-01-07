@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.application.user.dto.UserDto;
 import com.example.demo.domain.user.entity.User;
 
 @Service
@@ -13,7 +14,7 @@ public interface UserService {
 	 * ユーザー情報一覧取得
 	 * @return ユーザー情報
 	 */
-	public List<User> findAll();
+	public List<UserDto> findAll();
 
 	/**
 	 * ユーザー新規登録

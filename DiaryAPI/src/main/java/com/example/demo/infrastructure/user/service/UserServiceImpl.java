@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.application.user.dto.UserDto;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.infrastructure.user.repository.UserRepository;
 
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	 * @return ユーザー情報
 	 */
 	@Override
-	public List<User> findAll() {
+	public List<UserDto> findAll() {
 		return userRepository.findAll();
 	}
 
