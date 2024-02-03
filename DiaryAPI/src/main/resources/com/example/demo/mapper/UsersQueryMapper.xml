@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UsersQueryMapper">
+    <select id="findUsers" resultType="com.example.demo.domain.users.entity.Users">
+        SELECT
+        	u.user_id
+        	,	u.username
+        	,	u.age
+        	,	u.email
+        	,	u.auth
+        	,	u.diary_id
+        FROM
+        	users u
+        LEFT JOIN
+        	diaries d
+        ON
+        	u.user_id = d.user_id
+        ORDER BY
+        	u.user_id ASC
+    </select>
+</mapper>
