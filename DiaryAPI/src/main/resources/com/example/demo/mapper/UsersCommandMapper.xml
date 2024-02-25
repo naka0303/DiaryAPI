@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.UsersCommandMapper">
     <insert id="createUser"
     		keyProperty="user_id" 
-    		parameterType="com.example.demo.application.users.dto.InsertUsersDto">
+    		parameterType="com.example.demo.infrastructure.users.request.RegisterUsersRequest">
         INSERT INTO users
         (
         	username,
@@ -15,12 +15,27 @@
         )
         VALUES
         (
-        	#{username},
-        	#{age},
-        	#{email},
-        	#{password},
-        	#{auth},
+        	#{registerUsersRequest.username},
+        	#{registerUsersRequest.age},
+        	#{registerUsersRequest.email},
+        	#{registerUsersRequest.password},
+        	#{registerUsersRequest.auth},
         	CURRENT_TIMESTAMP
         )
     </insert>
+    
+    <update id="editUserById"
+    		keyProperty="user_id" 
+    		parameterType="com.example.demo.infrastructure.users.request.EditUsersRequest">
+    	UPDATE users
+    	SET
+    		username = #{editUsersRequest.username}
+        	, age = #{editUsersRequest.age}
+        	, email = #{editUsersRequest.email}
+        	, password = #{editUsersRequest.password}
+        	, auth = #{editUsersRequest.auth}
+        	, updated_at = CURRENT_TIMESTAMP
+        WHERE
+        	user_id = #{userId}
+    </update>
 </mapper>

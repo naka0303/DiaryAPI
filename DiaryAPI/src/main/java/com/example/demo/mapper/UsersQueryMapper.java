@@ -14,4 +14,11 @@ public interface UsersQueryMapper {
 	 * @return ユーザー情報
 	 */
 	public List<Users> findUsers();
+
+	/**
+	 * 特定ユーザー情報取得
+	 * @param userId
+	 * @return 特定ユーザー情報
+	 */
+	public Users findUser(Integer userId);
 }

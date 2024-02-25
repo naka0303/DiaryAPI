@@ -2,8 +2,9 @@ package com.example.demo.infrastructure.users.repository;
 
 import java.util.List;
 
-import com.example.demo.application.users.dto.InsertUsersDto;
 import com.example.demo.domain.users.entity.Users;
+import com.example.demo.infrastructure.users.request.EditUsersRequest;
+import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 
 public interface UsersRepository {
 	
@@ -14,9 +15,22 @@ public interface UsersRepository {
 	public List<Users> findUsers();
 
 	/**
-	 * 新規ユーザー登録
-	 * @param insertUsersDto ユーザー情報
+	 * 特定ユーザー情報取得
+	 * @param userId ユーザーIDß
+	 * @return 特定ユーザー情報
 	 */
-	public void createUser(InsertUsersDto insertUsersDto);
-
+	public Users findUser(Integer userId);
+	
+	/**
+	 * 特定ユーザー情報編集
+	 * @param userId ユーザーID
+	 * @param editUsersRequest 編集ユーザー情報
+	 */
+	public void editUserById(Integer userId, EditUsersRequest editUsersRequest);
+	
+	/**
+	 * ユーザー登録
+	 * @param registerUsersRequest 登録ユーザー情報
+	 */
+	public void createUser(RegisterUsersRequest registerUsersRequest);
 }

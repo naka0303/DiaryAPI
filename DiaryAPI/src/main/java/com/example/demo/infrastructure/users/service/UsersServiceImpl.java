@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.users.dto.InsertUsersDto;
 import com.example.demo.domain.users.entity.Users;
 import com.example.demo.infrastructure.users.repository.UsersRepository;
+import com.example.demo.infrastructure.users.request.EditUsersRequest;
+import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -30,13 +31,43 @@ public class UsersServiceImpl implements UsersService {
 		
 		return users;
 	}
-
+	
 	/**
-	 * 新規ユーザー登録
-	 * @param insertUsersDto ユーザー情報
+	 *　特定ユーザー情報取得
+	 * @param userId ユーザーID
+	 * @return 特定ユーザー情報
 	 */
 	@Override
-	public void createUser(InsertUsersDto insertUsersDto) {		
-		usersRepository.createUser(insertUsersDto);
+	public Users findUser(Integer userId) {
+		Users user = usersRepository.findUser(userId);
+		
+		return user;
 	};
+	
+	/**
+	 * 特定ユーザー情報編集
+	 * @param userId ユーザーID
+	 * @param editUsersRequest 編集ユーザー情報
+	 */
+	@Override
+	public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
+		
+		// 特定ユーザー情報取得
+		Users user = usersRepository.findUser(userId);
+		
+		if (user == null) {
+			// TODO: 例外処理
+		}
+		
+		usersRepository.editUserById(userId, editUsersRequest);
+	}
+
+	/**
+	 * ユーザー登録
+	 * @param registerUsersRequest 登録ユーザー情報
+	 */
+	@Override
+	public void createUser(RegisterUsersRequest registerUsersRequest) {
+		usersRepository.createUser(registerUsersRequest);
+	}
 }
