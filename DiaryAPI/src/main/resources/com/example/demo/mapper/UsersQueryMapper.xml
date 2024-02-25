@@ -18,4 +18,22 @@
         ORDER BY
         	u.user_id ASC
     </select>
+    
+    <select id="findUser" resultType="com.example.demo.domain.users.entity.Users">
+        SELECT
+        	u.user_id
+        	,	u.username
+        	,	u.age
+        	,	u.email
+        	,	u.auth
+        	,	u.diary_id
+        FROM
+        	users u
+        LEFT JOIN
+        	diaries d
+        ON
+        	u.user_id = d.user_id
+        WHERE
+        	u.user_id = #{userId}
+    </select>
 </mapper>

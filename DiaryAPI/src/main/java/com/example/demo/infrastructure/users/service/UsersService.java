@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.users.dto.InsertUsersDto;
 import com.example.demo.domain.users.entity.Users;
+import com.example.demo.infrastructure.users.request.EditUsersRequest;
+import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 
 @Service
 public interface UsersService {
@@ -18,8 +19,22 @@ public interface UsersService {
 	public List<Users> findUsers();
 
 	/**
-	 * ユーザー新規登録
-	 * @param insertUsersDto ユーザー情報
+	 * 特定ユーザー情報取得
+	 * @param userId
+	 * @return ユーザー情報
 	 */
-	public void createUser(InsertUsersDto insertUsersDto);
+	public Users findUser(Integer userId);
+	
+	/**
+	 * 特定ユーザー情報編集
+	 * @param userId ユーザーID
+	 * @param editUsersRequest 編集ユーザー情報
+	 */
+	public void editUserById(Integer userId, EditUsersRequest editUsersRequest);
+	
+	/**
+	 * ユーザー新規登録
+	 * @param registerUsersRequest 登録ユーザー情報
+	 */
+	public void createUser(RegisterUsersRequest registerUsersRequest);
 }

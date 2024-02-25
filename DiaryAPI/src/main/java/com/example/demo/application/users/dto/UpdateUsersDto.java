@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class InsertUsersDto {
+public class UpdateUsersDto {
 
 	@NonNull
 	@NotBlank
@@ -30,7 +30,7 @@ public class InsertUsersDto {
 	@NotBlank
 	private String auth;
 
-	public InsertUsersDto(
+	public UpdateUsersDto(
 			String username,
 			Integer age,
 			String email,
