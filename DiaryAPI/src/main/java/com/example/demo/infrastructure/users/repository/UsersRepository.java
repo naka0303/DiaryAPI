@@ -25,6 +25,7 @@ public interface UsersRepository {
 	 * 特定ユーザー情報編集
 	 * @param userId ユーザーID
 	 * @param editUsersRequest 編集ユーザー情報
+	 * @throws Exception 
 	 */
 	public void editUserById(Integer userId, EditUsersRequest editUsersRequest);
 	

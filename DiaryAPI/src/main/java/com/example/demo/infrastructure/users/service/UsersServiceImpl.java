@@ -3,22 +3,25 @@ package com.example.demo.infrastructure.users.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.example.demo.advice.NotFoundException;
 import com.example.demo.domain.users.entity.Users;
 import com.example.demo.infrastructure.users.repository.UsersRepository;
 import com.example.demo.infrastructure.users.request.EditUsersRequest;
 import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 
 @Service
+@RestControllerAdvice
 public class UsersServiceImpl implements UsersService {
-	
+
 	private final UsersRepository usersRepository;
-	
+
 	public UsersServiceImpl(
 			UsersRepository usersRepository) {
 		this.usersRepository = usersRepository;
 	}
-	
+
 	/**
 	 * ユーザー情報一覧取得
 	 * @return ユーザー情報リスト
@@ -26,12 +29,10 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public List<Users> findUsers() {
 		List<Users> users = usersRepository.findUsers();
-		
-		// TODO: nullチェック
-		
+
 		return users;
 	}
-	
+
 	/**
 	 *　特定ユーザー情報取得
 	 * @param userId ユーザーID
@@ -40,10 +41,14 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public Users findUser(Integer userId) {
 		Users user = usersRepository.findUser(userId);
-		
+
+		if (user == null) {
+			throw new NotFoundException(1, "Not found specified user");
+		}
+
 		return user;
 	};
-	
+
 	/**
 	 * 特定ユーザー情報編集
 	 * @param userId ユーザーID
@@ -51,14 +56,14 @@ public class UsersServiceImpl implements UsersService {
 	 */
 	@Override
 	public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
-		
+
 		// 特定ユーザー情報取得
 		Users user = usersRepository.findUser(userId);
-		
+
 		if (user == null) {
-			// TODO: 例外処理
+			throw new NotFoundException(1, "Not found specified user");
 		}
-		
+
 		usersRepository.editUserById(userId, editUsersRequest);
 	}
 

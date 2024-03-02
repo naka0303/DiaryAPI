@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.advice.NotFoundException;
 import com.example.demo.domain.users.entity.Users;
 import com.example.demo.infrastructure.users.request.EditUsersRequest;
 import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
@@ -46,7 +47,11 @@ public class UsersRepositoryImpl implements UsersRepository {
 	 */
 	@Override
 	public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
-		usersCommandMapper.editUserById(userId, editUsersRequest);
+		final int cnt = usersCommandMapper.editUserById(userId, editUsersRequest);
+		
+		if (cnt != 1) {
+			throw new NotFoundException(0, "No record updated");
+		}
 	}
 
 	/**
@@ -55,6 +60,10 @@ public class UsersRepositoryImpl implements UsersRepository {
 	 */
 	@Override
 	public void createUser(RegisterUsersRequest registerUsersRequest) {
-		usersCommandMapper.createUser(registerUsersRequest);
+		final int cnt = usersCommandMapper.createUser(registerUsersRequest);
+		
+		if (cnt != 1) {
+			throw new NotFoundException(0, "No record updated");
+		}
 	}
 }

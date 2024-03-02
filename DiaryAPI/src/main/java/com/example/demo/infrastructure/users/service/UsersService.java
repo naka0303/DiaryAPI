@@ -13,7 +13,6 @@ public interface UsersService {
 	
 	/**
 	 * ユーザー情報一覧取得
-	 * @return 
 	 * @return ユーザー情報
 	 */
 	public List<Users> findUsers();
