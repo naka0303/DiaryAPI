@@ -24,4 +24,10 @@ public interface UsersCommandMapper {
 	public int editUserById(
 		@Param("userId") Integer userId,
 		@Param("editUsersRequest") EditUsersRequest editUsersRequest);
+
+	/**
+	 * 特定ユーザー情報削除
+	 * @param userId
+	 */
+	public int deleteUserById(@Param("userId") Integer userId);
 }

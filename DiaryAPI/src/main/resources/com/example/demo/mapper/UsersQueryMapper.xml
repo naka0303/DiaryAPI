@@ -19,7 +19,7 @@
         	u.user_id ASC
     </select>
     
-    <select id="findUser" resultType="com.example.demo.domain.users.entity.Users">
+    <select id="findUserById" resultType="com.example.demo.domain.users.entity.Users">
         SELECT
         	u.user_id
         	,	u.username
