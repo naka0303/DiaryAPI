@@ -22,7 +22,7 @@ public interface UsersService {
 	 * @param userId
 	 * @return ユーザー情報
 	 */
-	public Users findUser(Integer userId);
+	public Users findUserById(Integer userId);
 	
 	/**
 	 * 特定ユーザー情報編集
@@ -36,4 +36,10 @@ public interface UsersService {
 	 * @param registerUsersRequest 登録ユーザー情報
 	 */
 	public void createUser(RegisterUsersRequest registerUsersRequest);
+
+	/**
+	 * 特定ユーザー情報削除
+	 * @param userId ユーザーID
+	 */
+	public void deleteUserByUserId(Integer userId);
 }

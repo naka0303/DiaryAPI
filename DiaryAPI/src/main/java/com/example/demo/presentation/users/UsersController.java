@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,9 +51,9 @@ public class UsersController {
 	 */
 	@GetMapping("/v1/users/{userId}")
 	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<FindUsersDto> findUser(
+	public ResponseEntity<FindUsersDto> findUserId(
 			@PathVariable Integer userId) {
-		Users user = usersService.findUser(userId);
+		Users user = usersService.findUserById(userId);
 		FindUsersDto userDto = FindUsersDto.toDto(user);
 		
 		return new ResponseEntity(userDto, HttpStatus.OK);
@@ -76,7 +77,7 @@ public class UsersController {
 		
 		usersService.editUserById(userId, editUsersRequest);
 		
-		return new ResponseEntity(null, HttpStatus.CREATED);
+		return new ResponseEntity(null, HttpStatus.OK);
 	}
 	
 	/**
@@ -87,7 +88,7 @@ public class UsersController {
 	@CrossOrigin("http://localhost:4200")
 	public ResponseEntity<Object> createUser(
 			@Validated @RequestBody RegisterUsersRequest registerUsersRequest,
-			BindingResult result){
+			BindingResult result) {
 		
 		if (result.hasErrors()) {
 			throw new ValidationException();
@@ -95,6 +96,20 @@ public class UsersController {
 		
 		usersService.createUser(registerUsersRequest);
 		
-		return new ResponseEntity(null, HttpStatus.CREATED);
+		return new ResponseEntity(null, HttpStatus.OK);
+	}
+	
+	/**
+	 * 特定ユーザー情報削除
+	 * @param userId ユーザー	ID
+	 */
+	@DeleteMapping("/v1/users/{userId}")
+	@CrossOrigin("http://localhost:4200")
+	public ResponseEntity<Object> deleteUserByUserId(
+			@PathVariable Integer userId) {
+		
+		usersService.deleteUserByUserId(userId);
+		
+		return new ResponseEntity(null, HttpStatus.OK);
 	}
 }

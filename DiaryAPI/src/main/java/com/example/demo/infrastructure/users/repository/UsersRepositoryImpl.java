@@ -36,8 +36,8 @@ public class UsersRepositoryImpl implements UsersRepository {
 	 * @return 特定ユーザー情報
 	 */
 	@Override
-	public Users findUser(Integer userId) {
-		return usersQueryMapper.findUser(userId);
+	public Users findUserById(Integer userId) {
+		return usersQueryMapper.findUserById(userId);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 		final int cnt = usersCommandMapper.editUserById(userId, editUsersRequest);
 		
 		if (cnt != 1) {
-			throw new NotFoundException(0, "No record updated");
+			throw new NotFoundException(0, "No record edited");
 		}
 	}
 
@@ -64,6 +64,19 @@ public class UsersRepositoryImpl implements UsersRepository {
 		
 		if (cnt != 1) {
 			throw new NotFoundException(0, "No record updated");
+		}
+	}
+	
+	/**
+	 * 特定ユーザー情報削除
+	 * @param userId ユーザーID
+	 */
+	@Override
+	public void deleteUserByUserId(Integer userId) {
+		final int cnt = usersCommandMapper.deleteUserById(userId);
+
+		if (cnt != 1) {
+			throw new NotFoundException(0, "No record deleted");
 		}
 	}
 }

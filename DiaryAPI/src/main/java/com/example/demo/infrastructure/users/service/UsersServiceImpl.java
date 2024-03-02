@@ -39,8 +39,8 @@ public class UsersServiceImpl implements UsersService {
 	 * @return 特定ユーザー情報
 	 */
 	@Override
-	public Users findUser(Integer userId) {
-		Users user = usersRepository.findUser(userId);
+	public Users findUserById(Integer userId) {
+		Users user = usersRepository.findUserById(userId);
 
 		if (user == null) {
 			throw new NotFoundException(1, "Not found specified user");
@@ -58,7 +58,7 @@ public class UsersServiceImpl implements UsersService {
 	public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
 
 		// 特定ユーザー情報取得
-		Users user = usersRepository.findUser(userId);
+		Users user = usersRepository.findUserById(userId);
 
 		if (user == null) {
 			throw new NotFoundException(1, "Not found specified user");
@@ -74,5 +74,14 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void createUser(RegisterUsersRequest registerUsersRequest) {
 		usersRepository.createUser(registerUsersRequest);
+	}
+	
+	/**
+	 * 特定ユーザー情報削除
+	 * @param userId ユーザーID
+	 */
+	@Override
+	public void deleteUserByUserId(Integer userId) {
+		usersRepository.deleteUserByUserId(userId);
 	}
 }
