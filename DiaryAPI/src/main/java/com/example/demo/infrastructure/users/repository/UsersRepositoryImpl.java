@@ -13,70 +13,78 @@ import com.example.demo.mapper.UsersQueryMapper;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * UsersRepositoryImplクラス.
+ */
 @Repository
 @RequiredArgsConstructor
 public class UsersRepositoryImpl implements UsersRepository {
-	
-	private final UsersQueryMapper usersQueryMapper;
-	
-	private final UsersCommandMapper usersCommandMapper;
-	
-	/**
-	 * ユーザー情報一覧取得
-	 * @return ユーザー情報
-	 */
-	@Override
-	public List<Users> findUsers() {
-		return usersQueryMapper.findUsers();
-	}
-	
-	/**
-	 * 特定ユーザー情報取得
-	 * @param userId ユーザーID
-	 * @return 特定ユーザー情報
-	 */
-	@Override
-	public Users findUserById(Integer userId) {
-		return usersQueryMapper.findUserById(userId);
-	}
-	
-	/**
-	 * 特定ユーザー情報編集
-	 * @param userId ユーザーID
-	 * @param editUsersRequest 編集ユーザー情報
-	 */
-	@Override
-	public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
-		final int cnt = usersCommandMapper.editUserById(userId, editUsersRequest);
-		
-		if (cnt != 1) {
-			throw new NotFoundException(0, "No record edited");
-		}
-	}
 
-	/**
-	 * ユーザー登録
-	 * @param registerUsersRequest 登録ユーザー情報
-	 */
-	@Override
-	public void createUser(RegisterUsersRequest registerUsersRequest) {
-		final int cnt = usersCommandMapper.createUser(registerUsersRequest);
-		
-		if (cnt != 1) {
-			throw new NotFoundException(0, "No record updated");
-		}
-	}
+  private final UsersQueryMapper usersQueryMapper;
 	
-	/**
-	 * 特定ユーザー情報削除
-	 * @param userId ユーザーID
-	 */
-	@Override
-	public void deleteUserByUserId(Integer userId) {
-		final int cnt = usersCommandMapper.deleteUserById(userId);
+  private final UsersCommandMapper usersCommandMapper;
+	
+  /**
+   * ユーザー情報一覧取得.
+   *
+   * @return ユーザー情報
+   */
+  @Override
+  public List<Users> findUsers() {
+    return usersQueryMapper.findUsers();
+  }
+	
+  /**
+   * 特定ユーザー情報取得.
+   *
+   * @param userId ユーザーID
+   * @return 特定ユーザー情報
+   */
+  @Override
+  public Users findUserById(Integer userId) {
+    return usersQueryMapper.findUserById(userId);
+  }
+	
+  /**
+   * 特定ユーザー情報編集.
+   *
+   * @param userId ユーザーID
+   * @param editUsersRequest 編集ユーザー情報
+   */
+  @Override
+  public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
+    final int cnt = usersCommandMapper.editUserById(userId, editUsersRequest);
+    
+    if (cnt != 1) {
+      throw new NotFoundException(0, "No record edited");
+    }
+  }
 
-		if (cnt != 1) {
-			throw new NotFoundException(0, "No record deleted");
-		}
-	}
+  /**
+   * ユーザー登録.
+   *
+   * @param registerUsersRequest 登録ユーザー情報
+   */
+  @Override
+  public void createUser(RegisterUsersRequest registerUsersRequest) {
+    final int cnt = usersCommandMapper.createUser(registerUsersRequest);
+    
+    if (cnt != 1) {
+      throw new NotFoundException(0, "No record updated");
+    }
+  }
+
+  /**
+   * 特定ユーザー情報削除.
+   *
+   * @param userId ユーザーID
+   */
+  @Override
+  public void deleteUserByUserId(Integer userId) {
+    final int cnt = usersCommandMapper.deleteUserById(userId);
+    
+    if (cnt != 1) {
+      throw new NotFoundException(0, "No record deleted");
+    }
+  }
 }

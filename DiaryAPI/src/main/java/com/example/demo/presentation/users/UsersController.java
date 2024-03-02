@@ -25,91 +25,100 @@ import com.example.demo.infrastructure.users.service.UsersService;
 
 import jakarta.validation.ValidationException;
 
+/**
+ * ユーザーAPIコントローラー.
+ */
 @RestController
 public class UsersController {
-	
-	@Autowired
-	UsersService usersService;
-	
-	/**
-	 * ユーザー情報一覧取得
-	 * @return ユーザー情報
-	 */
-	@GetMapping("/v1/users")
-	public ResponseEntity<List<FindUsersDto>> findUsers() {
-		List<Users> users = usersService.findUsers();
-		List<FindUsersDto> usersDtoList =
-				users.stream().map(FindUsersDto::toDto).collect(Collectors.toList());
-		
-		return new ResponseEntity(usersDtoList, HttpStatus.OK);
-	}
-	
-	/**
-	 * 特定ユーザー情報取得
-	 * @param userId ユーザーID
-	 * @return ユーザー情報
-	 */
-	@GetMapping("/v1/users/{userId}")
-	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<FindUsersDto> findUserId(
-			@PathVariable Integer userId) {
-		Users user = usersService.findUserById(userId);
-		FindUsersDto userDto = FindUsersDto.toDto(user);
-		
-		return new ResponseEntity(userDto, HttpStatus.OK);
-	}
-	
-	/**
-	 * 特定ユーザー情報編集
-	 * @param userId ユーザーID
-	 * @param editUsersRequest 編集ユーザー情報
-	 */
-	@PutMapping("/v1/users/{userId}")
-	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<Object> findUserById(
-			@PathVariable Integer userId,
-			@Validated @RequestBody EditUsersRequest editUsersRequest,
-			BindingResult result) {
-		
-		if (result.hasErrors()) {
-			throw new ValidationException();
-		}
-		
-		usersService.editUserById(userId, editUsersRequest);
-		
-		return new ResponseEntity(null, HttpStatus.OK);
-	}
-	
-	/**
-	 * ユーザー登録
-	 * @param registerUsersRequest 登録ユーザー情報
-	 */
-	@PostMapping("/v1/users")
-	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<Object> createUser(
-			@Validated @RequestBody RegisterUsersRequest registerUsersRequest,
-			BindingResult result) {
-		
-		if (result.hasErrors()) {
-			throw new ValidationException();
-		}
-		
-		usersService.createUser(registerUsersRequest);
-		
-		return new ResponseEntity(null, HttpStatus.OK);
-	}
-	
-	/**
-	 * 特定ユーザー情報削除
-	 * @param userId ユーザー	ID
-	 */
-	@DeleteMapping("/v1/users/{userId}")
-	@CrossOrigin("http://localhost:4200")
-	public ResponseEntity<Object> deleteUserByUserId(
-			@PathVariable Integer userId) {
-		
-		usersService.deleteUserByUserId(userId);
-		
-		return new ResponseEntity(null, HttpStatus.OK);
-	}
+  
+  @Autowired
+  UsersService usersService;
+  
+  /**
+   * ユーザー情報一覧取得.
+   *
+   * @return ユーザー情報
+   */
+  @GetMapping("/v1/users")
+  public ResponseEntity<List<FindUsersDto>> findUsers() {
+    List<Users> users = usersService.findUsers();
+    List<FindUsersDto> usersDtoList =
+        users.stream().map(FindUsersDto::toDto).collect(Collectors.toList());
+    
+    return new ResponseEntity(usersDtoList, HttpStatus.OK);
+  }
+  
+  /**
+   * 特定ユーザー情報取得.
+   *
+   * @param userId ユーザーID
+   *
+   * @return ユーザー情報
+   */
+  @GetMapping("/v1/users/{userId}")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<FindUsersDto> findUserId(
+      @PathVariable Integer userId) {
+    Users user = usersService.findUserById(userId);
+    FindUsersDto userDto = FindUsersDto.toDto(user);
+    
+    return new ResponseEntity(userDto, HttpStatus.OK);
+  }
+  
+  /**
+   * 特定ユーザー情報編集.
+   *
+   * @param userId ユーザーID
+   * @param editUsersRequest 編集ユーザー情報
+   */
+  @PutMapping("/v1/users/{userId}")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<Object> findUserById(
+      @PathVariable Integer userId,
+      @Validated @RequestBody EditUsersRequest editUsersRequest,
+      BindingResult result) {
+    
+    if (result.hasErrors()) {
+      throw new ValidationException();
+    }
+    
+    usersService.editUserById(userId, editUsersRequest);
+    
+    return new ResponseEntity(null, HttpStatus.OK);
+  }
+  
+  /**
+   * ユーザー登録.
+   *
+   * @param registerUsersRequest 登録ユーザー情報
+   */
+  @PostMapping("/v1/users")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<Object> createUser(
+      @Validated @RequestBody RegisterUsersRequest registerUsersRequest,
+      BindingResult result) {
+    
+    if (result.hasErrors()) {
+      throw new ValidationException();
+    }
+    
+    usersService.createUser(registerUsersRequest);
+    
+    return new ResponseEntity(null, HttpStatus.OK);
+  }
+  
+  /**
+   * 特定ユーザー情報削除.
+   *
+   * @param userId ユーザー  ID
+   */
+  @DeleteMapping("/v1/users/{userId}")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<Object> deleteUserByUserId(
+      @PathVariable Integer userId) {
+    
+    usersService.deleteUserByUserId(userId);
+    
+    return new ResponseEntity(null, HttpStatus.OK);
+  }
 }
