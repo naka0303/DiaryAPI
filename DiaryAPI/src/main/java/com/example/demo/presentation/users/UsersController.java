@@ -22,6 +22,8 @@ import com.example.demo.infrastructure.users.request.EditUsersRequest;
 import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 import com.example.demo.infrastructure.users.service.UsersService;
 
+import jakarta.validation.ValidationException;
+
 @RestController
 public class UsersController {
 	
@@ -69,7 +71,7 @@ public class UsersController {
 			BindingResult result) {
 		
 		if (result.hasErrors()) {
-			// TODO: 例外処理
+			throw new ValidationException();
 		}
 		
 		usersService.editUserById(userId, editUsersRequest);
@@ -88,7 +90,7 @@ public class UsersController {
 			BindingResult result){
 		
 		if (result.hasErrors()) {
-			// TODO: 例外処理
+			throw new ValidationException();
 		}
 		
 		usersService.createUser(registerUsersRequest);

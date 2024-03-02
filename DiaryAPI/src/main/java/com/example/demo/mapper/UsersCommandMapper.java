@@ -13,7 +13,7 @@ public interface UsersCommandMapper {
 	 * ユーザー登録
 	 * @param registerUsersRequest 登録ユーザー情報
 	 */
-	public void createUser(
+	public int createUser(
 		@Param("registerUsersRequest") RegisterUsersRequest registerUsersRequest);
 	
 	/**
@@ -21,7 +21,7 @@ public interface UsersCommandMapper {
 	 * @param userId ユーザーID
 	 * @param editUsersRequest 編集ユーザー情報
 	 */
-	public void editUserById(
+	public int editUserById(
 		@Param("userId") Integer userId,
 		@Param("editUsersRequest") EditUsersRequest editUsersRequest);
 }
