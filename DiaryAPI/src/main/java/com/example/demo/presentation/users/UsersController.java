@@ -84,7 +84,7 @@ public class UsersController {
     
     usersService.editUserById(userId, editUsersRequest);
     
-    return new ResponseEntity(null, HttpStatus.OK);
+    return ResponseEntity.ok(HttpStatus.OK);
   }
   
   /**
@@ -104,13 +104,13 @@ public class UsersController {
     
     usersService.createUser(registerUsersRequest);
     
-    return new ResponseEntity(null, HttpStatus.OK);
+    return ResponseEntity.ok(HttpStatus.OK);
   }
   
   /**
    * 特定ユーザー情報削除.
    *
-   * @param userId ユーザー  ID
+   * @param userId ユーザーID
    */
   @DeleteMapping("/v1/users/{userId}")
   @CrossOrigin("http://localhost:4200")
@@ -119,6 +119,6 @@ public class UsersController {
     
     usersService.deleteUserByUserId(userId);
     
-    return new ResponseEntity(null, HttpStatus.OK);
+    return ResponseEntity.ok(HttpStatus.OK);
   }
 }
