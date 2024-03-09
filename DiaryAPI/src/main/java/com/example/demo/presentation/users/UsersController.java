@@ -73,7 +73,7 @@ public class UsersController {
    */
   @PutMapping("/v1/users/{userId}")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<Object> findUserById(
+  public ResponseEntity<Object> editUserById(
       @PathVariable Integer userId,
       @Validated @RequestBody EditUsersRequest editUsersRequest,
       BindingResult result) {
