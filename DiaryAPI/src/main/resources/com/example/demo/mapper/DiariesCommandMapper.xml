@@ -2,36 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.DiariesCommandMapper">
     <insert id="insertDiaryByUserId"
-    		keyProperty="diary_id" 
-    		parameterType="com.example.demo.application.diaries.dto.InsertDiariesDto">
-    	INSERT INTO diaries
-    	(
-        	diary_id
-        	,  user_id
-        )
-        VALUES
-        (
-        	#{diaryId}
-        	,  #{userId}
-        )
+        keyProperty="diary_id" 
+        parameterType="com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest">
+            
+      INSERT INTO diaries
+      (
+        user_id
+      )
+      VALUES
+      (
+        #{userId}
+      )
     </insert>
     
     <insert id="insertContentByUserId"
-    		keyProperty="content_id" 
-    		parameterType="com.example.demo.application.diaries.dto.InsertDiariesDto">
-    	INSERT INTO contents
-    	(
-        	diary_id
-        	,  diary_title
-        	,  diary_content
-        	,  created_at
+        keyProperty="content_id" 
+        parameterType="com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest">
+        
+      INSERT INTO contents
+      (
+          diary_id
+          ,  diary_title
+          ,  diary_content
+          ,  created_at
         )
         VALUES
         (
-        	#{diaryId}
-        	,  #{diaryTitle}
-        	,  #{diaryContent}
-        	,  CURRENT_TIMESTAMP
+          #{diaryId}
+          ,  #{diaryTitle}
+          ,  #{diaryContent}
+          ,  CURRENT_TIMESTAMP
         )
     </insert>
 </mapper>
