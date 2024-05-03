@@ -2,6 +2,8 @@ package com.example.demo.infrastructure.users.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -19,6 +21,9 @@ import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 public class UsersServiceImpl implements UsersService {
   
   private final UsersRepository usersRepository;
+  
+  @Autowired
+  private PasswordEncoder passwordEncoder;
   
   public UsersServiceImpl(
       UsersRepository usersRepository) {
@@ -77,11 +82,17 @@ public class UsersServiceImpl implements UsersService {
   /**
    * ユーザー登録.
    *
-   * @param registerUsersRequest 登録ユーザー情報
+   * @param request 登録ユーザー情報
    */
   @Override
-  public void createUser(RegisterUsersRequest registerUsersRequest) {
-    usersRepository.createUser(registerUsersRequest);
+  public void createUser(RegisterUsersRequest request) {
+    Users users = new Users();
+    users.setAge(request.getAge());
+    users.setUsername(request.getUsername());
+    users.setEmail(request.getEmail());
+    users.setPassword(passwordEncoder.encode(request.getPassword()));
+    
+    usersRepository.createUser(users);
   }
 	
   /**

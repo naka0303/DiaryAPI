@@ -2,46 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UsersCommandMapper">
     <insert id="createUser"
-    		keyProperty="user_id" 
-    		parameterType="com.example.demo.infrastructure.users.request.RegisterUsersRequest">
+        keyProperty="user_id" 
+        parameterType="com.example.demo.domain.users.entity.Users">
         INSERT INTO users
         (
-        	username,
-        	age,
-        	email,
-        	password,
-        	auth,
-        	created_at
+          username,
+          age,
+          email,
+          password,
+          auth,
+          created_at
         )
         VALUES
         (
-        	#{registerUsersRequest.username},
-        	#{registerUsersRequest.age},
-        	#{registerUsersRequest.email},
-        	#{registerUsersRequest.password},
-        	#{registerUsersRequest.auth},
-        	CURRENT_TIMESTAMP
+          #{users.username},
+          #{users.age},
+          #{users.email},
+          #{users.password},
+          #{users.auth},
+          CURRENT_TIMESTAMP
         )
     </insert>
     
     <update id="editUserById"
-    		keyProperty="user_id" 
-    		parameterType="com.example.demo.infrastructure.users.request.EditUsersRequest">
-    	UPDATE users
-    	SET
-    		username = #{editUsersRequest.username}
-        	, age = #{editUsersRequest.age}
-        	, email = #{editUsersRequest.email}
-        	, password = #{editUsersRequest.password}
-        	, auth = #{editUsersRequest.auth}
-        	, updated_at = CURRENT_TIMESTAMP
+        keyProperty="user_id" 
+        parameterType="com.example.demo.infrastructure.users.request.EditUsersRequest">
+      UPDATE users
+      SET
+        username = #{editUsersRequest.username}
+          , age = #{editUsersRequest.age}
+          , email = #{editUsersRequest.email}
+          , password = #{editUsersRequest.password}
+          , auth = #{editUsersRequest.auth}
+          , updated_at = CURRENT_TIMESTAMP
         WHERE
-        	user_id = #{userId}
+          user_id = #{userId}
     </update>
     
     <delete id="deleteUserById">
-    	DELETE
-    	FROM users
-    	WHERE user_id = #{userId}
+      DELETE
+      FROM users
+      WHERE user_id = #{userId}
     </delete>
 </mapper>

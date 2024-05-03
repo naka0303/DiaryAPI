@@ -3,8 +3,8 @@ package com.example.demo.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.demo.domain.users.entity.Users;
 import com.example.demo.infrastructure.users.request.EditUsersRequest;
-import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 
 /**
  * UsersCommandMapperクラス.
@@ -15,10 +15,9 @@ public interface UsersCommandMapper {
   /**
    * ユーザー登録.
    *
-   * @param registerUsersRequest 登録ユーザー情報
+   * @param users 登録ユーザー情報
    */
-  public int createUser(
-      @Param("registerUsersRequest") RegisterUsersRequest registerUsersRequest);
+  public int createUser(@Param("users") Users users);
   
   /**
    * 特定ユーザー情報編集.
