@@ -1,12 +1,12 @@
 package com.example.demo.presentation.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.infrastructure.login.request.LoginUserRequest;
 import com.example.demo.infrastructure.users.service.UserLoginService;
 
 /**
@@ -21,15 +21,14 @@ public class LoginController {
   /**
    * ログイン.
    */
-  @GetMapping("/v1/login")
+  @PostMapping("/v1/login")
   @CrossOrigin("http://localhost:4200")
-  public String login() {
+  public Object login(
+      @RequestBody LoginUserRequest request) {
     
-    // 認証処理を実行
-    // Object authResult = this.userLoginService.login(request);
+    // 処理を実行
+    Object authResult = userLoginService.login(request);
     
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    System.out.println(auth.getName());
-    return "redirect:http://localhost:4200/users";
+    return authResult;
   }
 }
