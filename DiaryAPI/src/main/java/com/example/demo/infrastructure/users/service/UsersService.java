@@ -13,7 +13,6 @@ import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
  */
 @Service
 public interface UsersService {
-	
   /**
    * ユーザー情報一覧取得.
    *

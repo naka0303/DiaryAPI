@@ -20,11 +20,20 @@ public interface UsersQueryMapper {
   public List<Users> findUsers();
   
   /**
-   * 特定ユーザー情報取得.
+   * 特定ユーザーIDでのユーザー情報取得.
    *
    * @param userId
    *
    * @return 特定ユーザー情報
    */
   public Users findUserById(Integer userId);
+
+  /**
+   * 特定ユーザー名でのユーザー情報取得.
+   *
+   * @param username
+   *
+   * @return 特定ユーザー情報
+   */
+  public Users findUserByName(String username);
 }

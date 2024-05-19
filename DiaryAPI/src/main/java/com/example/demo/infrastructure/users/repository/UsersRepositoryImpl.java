@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.advice.NotFoundException;
 import com.example.demo.domain.users.entity.Users;
 import com.example.demo.infrastructure.users.request.EditUsersRequest;
-import com.example.demo.infrastructure.users.request.RegisterUsersRequest;
 import com.example.demo.mapper.UsersCommandMapper;
 import com.example.demo.mapper.UsersQueryMapper;
 
@@ -35,7 +34,7 @@ public class UsersRepositoryImpl implements UsersRepository {
   }
 	
   /**
-   * 特定ユーザー情報取得.
+   * 特定ユーザーIDでのユーザー情報取得.
    *
    * @param userId ユーザーID
    * @return 特定ユーザー情報
@@ -43,6 +42,17 @@ public class UsersRepositoryImpl implements UsersRepository {
   @Override
   public Users findUserById(Integer userId) {
     return usersQueryMapper.findUserById(userId);
+  }
+  
+  /**
+   * 特定ユーザー名でのユーザー情報取得.
+   *
+   * @param username ユーザー名
+   * @return 特定ユーザー情報
+   */
+  @Override
+  public Users findUserByName(String username) {
+    return usersQueryMapper.findUserByName(username);
   }
 	
   /**
@@ -66,8 +76,8 @@ public class UsersRepositoryImpl implements UsersRepository {
    * @param registerUsersRequest 登録ユーザー情報
    */
   @Override
-  public void createUser(RegisterUsersRequest registerUsersRequest) {
-    final int cnt = usersCommandMapper.createUser(registerUsersRequest);
+  public void createUser(Users users) {
+    final int cnt = usersCommandMapper.createUser(users);
     
     if (cnt != 1) {
       throw new NotFoundException(0, "No record updated");
