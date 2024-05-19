@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -47,8 +48,7 @@ public class UsersController {
   public ResponseEntity<List<FindUsersDto>> findUsers(
       Principal principal) {
     
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    System.out.println(auth.getName());
+    //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     
     List<Users> users = usersService.findUsers();
     List<FindUsersDto> usersDtoList =

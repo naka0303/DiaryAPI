@@ -1,5 +1,6 @@
 package com.example.demo.infrastructure.users.service;
 
+import com.example.demo.application.login.dto.PrincipalDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,9 @@ import com.example.demo.infrastructure.login.request.LoginUserRequest;
 import com.example.demo.infrastructure.users.repository.UsersRepository;
 
 import lombok.RequiredArgsConstructor;
+
+import java.security.Principal;
+import java.util.stream.Collectors;
 
 /**
  * UserLoginServiceクラス.
@@ -52,9 +56,9 @@ public class UserLoginService implements UserDetailsService {
    * @param request ログイン認証情報
    * @return 認証結果
    */
-  public Object login(LoginUserRequest request) {
+  public UserPrincipal login(LoginUserRequest request) {
     Authentication authentication = null;
-    Object principal = null;
+    PrincipalDto dto = new PrincipalDto();
     try {
       // ユーザー名でのユーザー情報取得
       UserDetails userDetail = loadUserByUsername(request.getUsername());
@@ -71,15 +75,13 @@ public class UserLoginService implements UserDetailsService {
       SecurityContextHolder.getContext().setAuthentication(authentication);
           
       //認証済みユーザ情報を格納
-      principal = authentication.getPrincipal();
-          
-      // クライアントへの返却データを設定
-      // authResult.setUserName(principal.getUsername());
-      // authResult.setPermissions(principal.getPermissions());
-      // authResult.setRoles(principal.getAuthorities().stream().map(authority -> authority.getAuthority()).collect(Collectors.toList()));
+      UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+
+      return userPrincipal;
+
     } catch (Exception e) {
       System.out.println(e);
     }
-    return principal;
+    return null;
   }
 }

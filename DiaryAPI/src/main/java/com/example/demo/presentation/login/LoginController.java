@@ -1,5 +1,7 @@
 package com.example.demo.presentation.login;
 
+import com.example.demo.application.login.dto.PrincipalDto;
+import com.example.demo.infrastructure.users.service.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.infrastructure.login.request.LoginUserRequest;
 import com.example.demo.infrastructure.users.service.UserLoginService;
+
+import java.security.Principal;
 
 /**
  * LoginControllerクラス.
@@ -23,12 +27,12 @@ public class LoginController {
    */
   @PostMapping("/v1/login")
   @CrossOrigin("http://localhost:4200")
-  public Object login(
+  public UserPrincipal login(
       @RequestBody LoginUserRequest request) {
     
     // 処理を実行
-    Object authResult = userLoginService.login(request);
-    
-    return authResult;
+    UserPrincipal userPrincipal = userLoginService.login(request);
+
+    return userPrincipal;
   }
 }
