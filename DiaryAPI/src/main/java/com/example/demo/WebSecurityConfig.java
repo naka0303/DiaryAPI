@@ -35,6 +35,8 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.POST, "/v1/login").permitAll()
                     .requestMatchers(HttpMethod.POST, "/v1/logout").permitAll()
                     .requestMatchers(HttpMethod.GET, "/v1/users/**").permitAll()
+                    .requestMatchers(HttpMethod.DELETE, "/v1/users/**").permitAll()
+                    .requestMatchers(HttpMethod.PUT, "/v1/users/**").permitAll()
                     .requestMatchers("/v1/users").permitAll()
                     .anyRequest().authenticated());
 

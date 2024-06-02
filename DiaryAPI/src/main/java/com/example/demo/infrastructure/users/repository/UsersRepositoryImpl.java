@@ -73,14 +73,14 @@ public class UsersRepositoryImpl implements UsersRepository {
   /**
    * ユーザー登録.
    *
-   * @param registerUsersRequest 登録ユーザー情報
+   * @param users 登録ユーザー情報
    */
   @Override
   public void createUser(Users users) {
     final int cnt = usersCommandMapper.createUser(users);
     
     if (cnt != 1) {
-      throw new NotFoundException(0, "No record updated");
+      throw new NotFoundException(0, "No record created");
     }
   }
 

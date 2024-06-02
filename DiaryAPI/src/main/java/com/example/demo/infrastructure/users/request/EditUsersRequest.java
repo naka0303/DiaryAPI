@@ -13,8 +13,6 @@ public class EditUsersRequest {
   private Integer age;
 
   private String email;
-  
-  private String password;
 
   private String auth;
 }

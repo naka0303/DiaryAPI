@@ -91,6 +91,7 @@ public class UsersServiceImpl implements UsersService {
     users.setUsername(request.getUsername());
     users.setEmail(request.getEmail());
     users.setPassword(passwordEncoder.encode(request.getPassword()));
+    users.setAuth(request.getAuth());
     
     usersRepository.createUser(users);
   }

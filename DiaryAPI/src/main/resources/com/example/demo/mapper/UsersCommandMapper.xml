@@ -32,7 +32,6 @@
         username = #{editUsersRequest.username}
           , age = #{editUsersRequest.age}
           , email = #{editUsersRequest.email}
-          , password = #{editUsersRequest.password}
           , auth = #{editUsersRequest.auth}
           , updated_at = CURRENT_TIMESTAMP
         WHERE
