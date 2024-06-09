@@ -1,12 +1,11 @@
 package com.example.demo.infrastructure.diaries.service;
 
-import java.util.List;
 
+import com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.diariesContents.entity.DiariesContents;
 import com.example.demo.infrastructure.diaries.repository.DiariesRepository;
-import com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest;
 
 /**
  * DiariesServiceImplクラス.
@@ -27,8 +26,8 @@ public class DiariesServiceImpl implements DiariesService {
    * @return 日記情報リスト
    */
   @Override
-  public List<DiariesContents> findDiariesByUserId(Integer userId) {
-    List<DiariesContents> diariesContents = diariesRepository.findDiariesByUserId(userId);
+  public DiariesContents findDiaryByUserId(Integer userId) {
+    DiariesContents diariesContents = diariesRepository.findDiaryByUserId(userId);
     
     // TODO: nullチェック
     
@@ -40,7 +39,7 @@ public class DiariesServiceImpl implements DiariesService {
    * @param registerDiaryRequest 日記登録情報
    */
   @Override
-  public void createDiaryByUserId(RegisterDiaryRequest registerDiaryRequest) {
-    diariesRepository.createDiaryByUserId(registerDiaryRequest);
+  public void registerDiaryByUserId(RegisterDiaryRequest registerDiaryRequest) throws Exception {
+    diariesRepository.registerDiaryByUserId(registerDiaryRequest);
   }
 }

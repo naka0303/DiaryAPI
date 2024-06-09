@@ -21,9 +21,9 @@ public interface UsersService {
   public List<Users> findUsers();
 
   /**
-   * 特定ユーザー情報取得.
+   * ユーザーIDでの特定ユーザー情報取得.
    *
-   * @param userId
+   * @param userId ユーザーID
    * 
    * @return ユーザー情報
    */

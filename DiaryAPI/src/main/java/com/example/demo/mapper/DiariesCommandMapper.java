@@ -2,7 +2,7 @@ package com.example.demo.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * DiariesCommandMapperクラス.
@@ -13,14 +13,20 @@ public interface DiariesCommandMapper {
   /**
    * 日記登録.
    *
-   * @param registerDiaryRequest 日記登録情報
+   * @param userId ユーザーID
    */
-  public void insertDiaryByUserId(RegisterDiaryRequest registerDiaryRequest);
+  public int insertDiaryByUserId(
+          @Param("userId") Integer userId);
   
   /**
    * 日記記事登録.
    *
-   * @param registerDiaryRequest 日記登録情報
+   * @param diaryId 日記ID
+   * @param diaryTitle 日記タイトル
+   * @param diaryContent 日記記事内容
    */
-  public void insertContentByUserId(RegisterDiaryRequest registerDiaryRequest);
+  public int insertContentByUserId(
+          @Param("diaryId") Integer diaryId,
+          @Param("diaryTitle") String diaryTitle,
+          @Param("diaryContent") String diaryContent);
 }

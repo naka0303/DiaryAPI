@@ -59,11 +59,17 @@ public class UsersRepositoryImpl implements UsersRepository {
    * 特定ユーザー情報編集.
    *
    * @param userId ユーザーID
-   * @param editUsersRequest 編集ユーザー情報
+   * @param request 編集ユーザー情報
    */
   @Override
-  public void editUserById(Integer userId, EditUsersRequest editUsersRequest) {
-    final int cnt = usersCommandMapper.editUserById(userId, editUsersRequest);
+  public void editUserById(Integer userId, EditUsersRequest request) {
+    final int cnt = usersCommandMapper.editUserById(
+            userId,
+            request.getUsername(),
+            request.getAge(),
+            request.getEmail(),
+            request.getAuth(),
+            request.getDiaryId());
     
     if (cnt != 1) {
       throw new NotFoundException(0, "No record edited");

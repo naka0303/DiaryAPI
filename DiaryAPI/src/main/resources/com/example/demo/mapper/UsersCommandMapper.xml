@@ -29,11 +29,23 @@
         parameterType="com.example.demo.infrastructure.users.request.EditUsersRequest">
       UPDATE users
       SET
-        username = #{editUsersRequest.username}
-          , age = #{editUsersRequest.age}
-          , email = #{editUsersRequest.email}
-          , auth = #{editUsersRequest.auth}
+        username = #{username}
+          , age = #{age}
+          , email = #{email}
+          , auth = #{auth}
+          , diary_id = #{diaryId}
           , updated_at = CURRENT_TIMESTAMP
+        WHERE
+          user_id = #{userId}
+    </update>
+
+    <update id="editDiaryIdById"
+            keyProperty="user_id"
+            parameterType="com.example.demo.infrastructure.users.request.EditDiaryIdRequest">
+        UPDATE users
+        SET
+          diary_id = #{diaryId}
+          ,  updated_at = CURRENT_TIMESTAMP
         WHERE
           user_id = #{userId}
     </update>
