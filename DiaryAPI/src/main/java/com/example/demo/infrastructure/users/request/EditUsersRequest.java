@@ -15,4 +15,6 @@ public class EditUsersRequest {
   private String email;
 
   private String auth;
+
+  private Integer diaryId;
 }

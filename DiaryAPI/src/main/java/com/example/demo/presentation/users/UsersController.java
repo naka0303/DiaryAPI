@@ -7,9 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,9 +44,7 @@ public class UsersController {
   @CrossOrigin("http://localhost:4200")
   public ResponseEntity<List<FindUsersDto>> findUsers(
       Principal principal) {
-    
-    //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    
+
     List<Users> users = usersService.findUsers();
     List<FindUsersDto> usersDtoList =
         users.stream().map(FindUsersDto::toDto).collect(Collectors.toList());
@@ -58,7 +53,7 @@ public class UsersController {
   }
   
   /**
-   * 特定ユーザー情報取得.
+   * ユーザーIDでの特定ユーザー情報取得.
    *
    * @param userId ユーザーID
    *
@@ -66,14 +61,14 @@ public class UsersController {
    */
   @GetMapping("/v1/users/{userId}")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<FindUsersDto> findUserId(
+  public ResponseEntity<FindUsersDto> findUserById(
       @PathVariable Integer userId) {
     Users user = usersService.findUserById(userId);
     FindUsersDto userDto = FindUsersDto.toDto(user);
     
     return new ResponseEntity(userDto, HttpStatus.OK);
   }
-  
+
   /**
    * 特定ユーザー情報編集.
    *

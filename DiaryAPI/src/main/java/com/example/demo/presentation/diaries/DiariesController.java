@@ -2,6 +2,7 @@ package com.example.demo.presentation.diaries;
 
 import java.util.List;
 
+import com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.application.diaries.dto.InsertDiariesDto;
 import com.example.demo.domain.diariesContents.entity.DiariesContents;
-import com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest;
 import com.example.demo.infrastructure.diaries.service.DiariesService;
 
 import jakarta.validation.ValidationException;
@@ -41,7 +41,7 @@ public class DiariesController {
   public ResponseEntity<List<InsertDiariesDto>> findDiariesByUserId(
       @PathVariable Integer userId) {
     
-    List<DiariesContents> diariesContents = diariesService.findDiariesByUserId(userId);
+    DiariesContents diariesContents = diariesService.findDiaryByUserId(userId);
     
     return new ResponseEntity(diariesContents, HttpStatus.OK);
   }
@@ -55,7 +55,7 @@ public class DiariesController {
    */
   @PostMapping("/v1/diaries")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<Object> createDiaryByUserId(
+  public ResponseEntity<Object> registerDiaryByUserId(
       @Validated @RequestBody RegisterDiaryRequest registerDiaryRequest,
       BindingResult result) throws Exception {
     
@@ -63,7 +63,7 @@ public class DiariesController {
       throw new ValidationException();
     }
     
-    diariesService.createDiaryByUserId(registerDiaryRequest);
+    diariesService.registerDiaryByUserId(registerDiaryRequest);
     
     return ResponseEntity.ok(HttpStatus.OK);
   }

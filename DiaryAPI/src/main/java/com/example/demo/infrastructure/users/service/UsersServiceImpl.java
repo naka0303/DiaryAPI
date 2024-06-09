@@ -43,7 +43,7 @@ public class UsersServiceImpl implements UsersService {
   }
 
   /**
-   * 特定ユーザー情報取得.
+   * ユーザーIDでの特定ユーザー情報取得.
    *
    * @param userId ユーザーID
    *
@@ -59,7 +59,7 @@ public class UsersServiceImpl implements UsersService {
     
     return user;
   }
-  
+
   /**
    * 特定ユーザー情報編集.
    *

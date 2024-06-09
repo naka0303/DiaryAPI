@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.DiariesCommandMapper">
     <insert id="insertDiaryByUserId"
         keyProperty="diary_id" 
-        parameterType="com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest">
+        parameterType="com.example.demo.domain.diaries.entity.Diaries">
             
       INSERT INTO diaries
       (

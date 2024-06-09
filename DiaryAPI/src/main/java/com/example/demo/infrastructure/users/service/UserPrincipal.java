@@ -20,6 +20,8 @@ public class UserPrincipal implements UserDetails {
     this.users = users;
   }
 
+  public Integer getUserId() { return users.getUserId(); }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Collections.singleton(new SimpleGrantedAuthority("GENERAL"));
