@@ -1,4 +1,4 @@
-package com.example.demo.domain.contents.entity;
+package com.example.demo.domain.content.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

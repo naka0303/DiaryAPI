@@ -1,4 +1,4 @@
-package com.example.demo.infrastructure.contents.repository;
+package com.example.demo.infrastructure.diaryContent.repository;
 
 import com.example.demo.application.diaryContent.dto.FindDiaryContentDto;
 import com.example.demo.mapper.DiaryContentQueryMapper;

@@ -1,4 +1,4 @@
-package com.example.demo.infrastructure.contents.service;
+package com.example.demo.infrastructure.diaryContent.service;
 
 import com.example.demo.application.diaryContent.dto.FindDiaryContentDto;
 import org.springframework.stereotype.Service;

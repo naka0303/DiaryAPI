@@ -1,7 +1,7 @@
-package com.example.demo.infrastructure.contents.service;
+package com.example.demo.infrastructure.diaryContent.service;
 
 import com.example.demo.application.diaryContent.dto.FindDiaryContentDto;
-import com.example.demo.infrastructure.contents.repository.DiaryContentQueryRepository;
+import com.example.demo.infrastructure.diaryContent.repository.DiaryContentQueryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
