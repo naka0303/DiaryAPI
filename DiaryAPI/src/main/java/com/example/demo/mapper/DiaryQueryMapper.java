@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.domain.diariesContents.entity.DiariesContents;
 
 @Mapper
-public interface DiariesQueryMapper {
+public interface DiaryQueryMapper {
 	
 	/**
 	 * 日記情報一覧取得

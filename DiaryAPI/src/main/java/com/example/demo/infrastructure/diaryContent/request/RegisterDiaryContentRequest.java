@@ -1,18 +1,18 @@
-package com.example.demo.infrastructure.diaries.request;
+package com.example.demo.infrastructure.diaryContent.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * RegisterDiaryRequestクラス.
+ * RegisterDiaryContentRequestクラス.
  */
 @Data
-public class RegisterDiaryRequest {
-  
+public class RegisterDiaryContentRequest {
+
   @NotNull
   private Integer userId;
-  
+
   @NotNull
   @NotBlank
   private String diaryTitle;

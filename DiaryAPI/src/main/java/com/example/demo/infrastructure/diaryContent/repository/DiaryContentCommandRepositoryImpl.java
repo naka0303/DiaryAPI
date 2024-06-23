@@ -1,48 +1,36 @@
-package com.example.demo.infrastructure.diaries.repository;
-
-import com.example.demo.domain.users.entity.Users;
-import com.example.demo.infrastructure.diaries.request.RegisterDiaryRequest;
-import com.example.demo.mapper.UsersCommandMapper;
-import com.example.demo.mapper.UsersQueryMapper;
-import org.springframework.stereotype.Repository;
+package com.example.demo.infrastructure.diaryContent.repository;
 
 import com.example.demo.domain.diariesContents.entity.DiariesContents;
-import com.example.demo.mapper.DiariesCommandMapper;
-import com.example.demo.mapper.DiariesQueryMapper;
-
+import com.example.demo.domain.users.entity.Users;
+import com.example.demo.infrastructure.diaryContent.request.RegisterDiaryContentRequest;
+import com.example.demo.mapper.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 /**
- * DiariesRepositoryImplクラス.
+ * DiaryContentCommandRepositoryImplクラス.
  */
 @Repository
 @RequiredArgsConstructor
-public class DiariesRepositoryImpl implements DiariesRepository {
+public class DiaryContentCommandRepositoryImpl implements DiaryContentCommandRepository {
   
-  private final DiariesQueryMapper diariesQueryMapper;
+  private final DiaryQueryMapper diaryQueryMapper;
   
-  private final DiariesCommandMapper diariesCommandMapper;
+  private final DiaryCommandMapper diaryCommandMapper;
+
+  private final DiaryContentCommandMapper diaryContentCommandMapper;
 
   private final UsersQueryMapper usersQueryMapper;
 
   private final UsersCommandMapper usersCommandMapper;
-  
-  /**
-   * 日記情報一覧取得.
-   *
-   * @return 日記情報
-   */
-  public DiariesContents findDiaryByUserId(Integer userId) {
-    return diariesQueryMapper.findDiaryByUserId(userId);
-  }
 
   /**
-   * 日記登録.
+   * 日記記事登録.
    *
    * @param request 日記登録情報
    */
-  public void registerDiaryByUserId(
-          RegisterDiaryRequest request) throws Exception {
+  public void registerDiaryContentByUserId(
+          RegisterDiaryContentRequest request) throws Exception {
     
     // ブログが初投稿であれば、diariesテーブルに紐付け情報を登録する
     Users user = usersQueryMapper.findUserById(request.getUserId());
@@ -52,7 +40,7 @@ public class DiariesRepositoryImpl implements DiariesRepository {
 
     if (user.getDiaryId() == null)  {
       // diariesテーブルにユーザーとの紐付け情報を登録
-      final int insertCnt = diariesCommandMapper.insertDiaryByUserId(
+      final int insertCnt = diaryCommandMapper.insertDiaryByUserId(
               request.getUserId());
       if (insertCnt != 1) {
         throw new Exception("Insert diary failed");
@@ -60,7 +48,7 @@ public class DiariesRepositoryImpl implements DiariesRepository {
 
       // diariesテーブルからdiaryIdを取得
       DiariesContents diaryByUserId =
-              diariesQueryMapper.findDiaryByUserId(request.getUserId());
+              diaryQueryMapper.findDiaryByUserId(request.getUserId());
       if (diaryByUserId == null) {
         throw new Exception("Diary not found");
       }
@@ -80,7 +68,7 @@ public class DiariesRepositoryImpl implements DiariesRepository {
     }
 
     // 日記記事登録
-    final int insertCnt = diariesCommandMapper.insertContentByUserId(
+    final int insertCnt = diaryContentCommandMapper.insertDiaryContentByUserId(
             user.getDiaryId(), request.getDiaryTitle(), request.getDiaryContent());
     if (insertCnt != 1) {
       throw new Exception("Insert content failed");
