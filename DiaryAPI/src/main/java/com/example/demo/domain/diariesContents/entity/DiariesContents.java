@@ -10,9 +10,12 @@ import lombok.Data;
 @Entity
 @Data
 public class DiariesContents {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "content_id")
+	private Integer contentId;
+
 	@Column(name = "diary_id")
 	private Integer diaryId;
 	
@@ -21,7 +24,4 @@ public class DiariesContents {
 	
 	@Column(name = "diary_content")
 	private String diaryContent;
-	
-	@Column(name = "user_id")
-	private Integer userId;
 }
