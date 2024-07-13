@@ -47,10 +47,26 @@ public class Content {
 
 	/**
 	 * エンティティ変換
-	 * @param dtoList dtoList
-	 * @return 日記情報エンティティリスト
+	 * @param dto FindDiaryContentDto
+	 * @return Contentエンティティ
 	 */
-	public List<Content> toEntity(List<FindDiaryContentDto> dtoList) {
+	public Content toEntity(FindDiaryContentDto dto) {
+		Content content = new Content();
+
+		content.setContentId(dto.getContentId());
+		content.setDiaryId(dto.getDiaryId());
+		content.setDiaryTitle(dto.getDiaryTitle());
+		content.setDiaryContent(dto.getDiaryContent());
+
+		return content;
+	}
+
+	/**
+	 * エンティティリスト変換
+	 * @param dtoList dtoList
+	 * @return Contentエンティティリスト
+	 */
+	public List<Content> toEntityList(List<FindDiaryContentDto> dtoList) {
 		List<Content> contentList = new ArrayList<>();
 
 		for (FindDiaryContentDto dto : dtoList) {

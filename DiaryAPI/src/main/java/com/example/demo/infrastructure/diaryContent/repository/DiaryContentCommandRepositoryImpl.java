@@ -1,6 +1,6 @@
 package com.example.demo.infrastructure.diaryContent.repository;
 
-import com.example.demo.domain.diariesContents.entity.DiariesContents;
+import com.example.demo.application.diary.dto.FindDiaryDto;
 import com.example.demo.domain.users.entity.Users;
 import com.example.demo.infrastructure.diaryContent.request.RegisterDiaryContentRequest;
 import com.example.demo.mapper.*;
@@ -13,10 +13,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class DiaryContentCommandRepositoryImpl implements DiaryContentCommandRepository {
-  
+
   private final DiaryQueryMapper diaryQueryMapper;
-  
+
   private final DiaryCommandMapper diaryCommandMapper;
+  
+  private final DiaryContentQueryMapper diaryContentQueryMapper;
 
   private final DiaryContentCommandMapper diaryContentCommandMapper;
 
@@ -47,8 +49,8 @@ public class DiaryContentCommandRepositoryImpl implements DiaryContentCommandRep
       }
 
       // diariesテーブルからdiaryIdを取得
-      DiariesContents diaryByUserId =
-              diaryQueryMapper.findDiaryByUserId(request.getUserId());
+      FindDiaryDto diaryByUserId =
+              diaryQueryMapper.selectDiaryByUserId(request.getUserId());
       if (diaryByUserId == null) {
         throw new Exception("Diary not found");
       }

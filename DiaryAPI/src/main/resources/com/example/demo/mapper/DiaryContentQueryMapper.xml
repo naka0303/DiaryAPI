@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.DiaryContentQueryMapper">
-    <select id="selectDiaryContentByDiaryId" resultType="com.example.demo.application.diaryContent.dto.FindDiaryContentDto">
+    <select id="selectDiaryContentByContentId" resultType="com.example.demo.application.diaryContent.dto.FindDiaryContentDto">
         SELECT
           c.content_id
           , c.diary_id
@@ -10,8 +10,18 @@
         FROM
           contents c
         WHERE
-          c.diary_id = #{diaryId}
-        ORDER BY
-          c.content_id ASC
+          c.content_id = #{contentId}
+    </select>
+
+    <select id="selectDiaryContentByDiaryId" resultType="com.example.demo.application.diaryContent.dto.FindDiaryContentDto">
+        SELECT
+            c.content_id
+            , c.diary_id
+            , c.diary_title
+            , c.diary_content
+        FROM
+            contents c
+        WHERE
+            c.diary_id = #{diaryId}
     </select>
 </mapper>
