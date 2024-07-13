@@ -11,10 +11,10 @@ import org.apache.ibatis.annotations.Param;
 public interface DiaryCommandMapper {
   
   /**
-   * 日記登録.
+   * 日記紐付け登録.
    *
    * @param userId ユーザーID
    */
-  public int insertDiaryByUserId(
+  int insertDiaryByUserId(
           @Param("userId") Integer userId);
 }

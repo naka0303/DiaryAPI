@@ -20,12 +20,22 @@ public class DiaryContentQueryServiceImpl implements DiaryContentQueryService {
   }
 
   /**
-   * 日記情報一覧取得
+   * 指定された日記IDに紐づく日記記事情報
    * @param diaryId 日記ID
-   * @return 日記記事情報
+   * @return 指定された日記IDに紐づく日記記事情報
    */
   @Override
   public List<FindDiaryContentDto> findDiaryContentByDiaryId(Integer diaryId) {
     return this.diaryContentQueryRepository.findDiaryContentByDiaryId(diaryId);
+  }
+
+  /**
+   * 指定された日記記事IDに紐づく日記記事情報
+   * @param contentId 日記記事ID
+   * @return　指定された日記記事IDに紐づく日記記事情報
+   */
+  @Override
+  public FindDiaryContentDto findDiaryContentByContentId(Integer contentId) {
+    return this.diaryContentQueryRepository.findDiaryContentByContentId(contentId);
   }
 }
