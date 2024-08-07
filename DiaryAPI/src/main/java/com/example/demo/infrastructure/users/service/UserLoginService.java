@@ -1,7 +1,12 @@
 package com.example.demo.infrastructure.users.service;
 
 import com.example.demo.application.login.dto.PrincipalDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +22,7 @@ import com.example.demo.infrastructure.login.request.LoginUserRequest;
 import com.example.demo.infrastructure.users.repository.UsersRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.ErrorResponse;
 
 import java.security.Principal;
 import java.util.stream.Collectors;
@@ -27,7 +33,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class UserLoginService implements UserDetailsService {
-  
+
+  private static final Logger log = LoggerFactory.getLogger(UserLoginService.class);
   @Autowired
   private UsersRepository usersRepository;
 
@@ -56,7 +63,7 @@ public class UserLoginService implements UserDetailsService {
    * @param request ログイン認証情報
    * @return 認証結果
    */
-  public UserPrincipal login(LoginUserRequest request) {
+  public UserPrincipal login(LoginUserRequest request) throws Exception {
     Authentication authentication = null;
     PrincipalDto dto = new PrincipalDto();
     try {
@@ -74,13 +81,17 @@ public class UserLoginService implements UserDetailsService {
       // 認証OKの場合は、認証結果をcontextholderに設定
       SecurityContextHolder.getContext().setAuthentication(authentication);
           
-      //認証済みユーザ情報を格納
+      // 認証済みユーザ情報を格納
       UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
       return userPrincipal;
 
     } catch (Exception e) {
-      System.out.println(e);
+      log.error(e.getMessage());
+      // throw new Exception(e.getMessage());
+      ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .contentType(MediaType.APPLICATION_JSON)
+              .body(e.getMessage());
     }
     return null;
   }

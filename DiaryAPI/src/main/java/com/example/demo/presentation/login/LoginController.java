@@ -28,10 +28,10 @@ public class LoginController {
   @PostMapping("/v1/login")
   @CrossOrigin("http://localhost:4200")
   public UserPrincipal login(
-      @RequestBody LoginUserRequest request) {
+      @RequestBody LoginUserRequest request) throws Exception {
     
     // 処理を実行
-    UserPrincipal userPrincipal = userLoginService.login(request);
+    UserPrincipal userPrincipal = userLoginService. login(request);
 
     return userPrincipal;
   }
