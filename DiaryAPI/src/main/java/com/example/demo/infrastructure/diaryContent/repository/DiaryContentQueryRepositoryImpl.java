@@ -16,8 +16,23 @@ public class DiaryContentQueryRepositoryImpl implements DiaryContentQueryReposit
 
   private final DiaryContentQueryMapper diaryContentQueryMapper;
 
+  /**
+   * 指定された日記IDに紐づく日記記事
+   * @param diaryId   日記ID
+   * @return 指定された日記IDに紐づく日記記事
+   */
   @Override
   public List<FindDiaryContentDto> findDiaryContentByDiaryId(Integer diaryId) {
     return diaryContentQueryMapper.selectDiaryContentByDiaryId(diaryId);
+  }
+
+  /**
+   * 指定された日記記事IDに紐づく日記記事
+   * @param contentId 日記記事ID
+   * @return 指定された日記記事IDに紐づく日記記事
+   */
+  @Override
+  public FindDiaryContentDto findDiaryContentByContentId(Integer contentId) {
+    return diaryContentQueryMapper.selectDiaryContentByContentId(contentId);
   }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.application.diaries.dto;
+package com.example.demo.application.diary.dto;
 
 import lombok.Getter;
 import lombok.Setter;
