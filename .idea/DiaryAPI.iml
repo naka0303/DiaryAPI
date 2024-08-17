@@ -2,6 +2,12 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <annotation-paths>
+      <root url="file://$MODULE_DIR$" />
+    </annotation-paths>
+    <javadoc-paths>
+      <root url="file://$MODULE_DIR$" />
+    </javadoc-paths>
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
