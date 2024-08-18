@@ -16,7 +16,7 @@ public interface DiaryCommandMapper {
   /**
    * 日記紐付け登録.
    *
-   * @param userId ユーザーID
+   * @param diaryLinkedUser 紐づけ情報
    */
   int insertDiaryLinkedUser(
           @Param("diaryLinkedUser") DiaryLinkedUser diaryLinkedUser);
