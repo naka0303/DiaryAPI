@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.DiaryCommandMapper">
-    <insert id="insertDiaryByUserId" keyProperty="diary_id"
-        parameterType="com.example.demo.infrastructure.diary.request.RegisterDiaryRequest">
 
-        INSERT INTO diaries
+    <insert id="insertDiaryLinkedUser" useGeneratedKeys="true" keyProperty="diaryId" parameterType="com.example.demo.infrastructure.diary.request.RegisterDiaryRequest">
+      INSERT INTO diaries_linked_users
+       (
+         user_id
+       )
+      VALUES
+       (
+         #{diaryLinkedUser.userId}
+       )
+    </insert>
+
+    <insert id="insertDiary" keyProperty="diaryId" parameterType="com.example.demo.infrastructure.diary.request.RegisterDiaryRequest">
+      INSERT INTO diaries
         (
-            user_id
+          diary_id
+          ,  diary_title
+          ,  diary_content
+          ,  created_at
         )
-        VALUES
+      VALUES
         (
-            #{userId}
+          #{diaryId}
+          ,  #{diaryTitle}
+          ,  #{diaryContent}
+          ,  CURRENT_TIMESTAMP
         )
     </insert>
 </mapper>

@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.DiaryQueryMapper">
-	<select id="selectDiaryByUserId" resultType="com.example.demo.application.diary.dto.FindDiaryDto">
-        SELECT
-		    d.diary_id
-			,  d.user_id
-        FROM
-        	diaries d
+
+	<select id="selectDiaryById" resultType="com.example.demo.application.diary.dto.FindDiaryDto">
+		SELECT
+		  d.diary_id
+		  , d.diary_title
+		  , d.diary_content
+		  , d.created_at
+		  , d.updated_at
+		  , d.deleted_at
+		FROM
+		  diaries d
 		WHERE
-		    d.user_id = #{userId}
-    </select>
+		  d.diary_id = #{diaryId}
+	</select>
+
+	<select id="selectDiariesLinkedUser" resultType="com.example.demo.application.diary.dto.FindDiaryLinkedUserDto">
+		SELECT
+		  d.diary_id
+		  ,  d.user_id
+		FROM
+		  diaries_linked_users d
+		WHERE
+		  d.user_id = #{userId}
+	</select>
 </mapper>

@@ -10,9 +10,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 @Table(name = "diaries")
@@ -25,8 +25,21 @@ public class Diary {
 	private Integer diaryId;
 
 	@NotBlank
-	@Column(name = "user_id")
-	private Integer userId;
+	@Column(name = "diary_title")
+	private String diaryTitle;
+
+	@NotBlank
+	@Column(name = "diary_content")
+	private String diaryContent;
+
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
+
+	@Column(name = "deleted_at")
+	private LocalDateTime deletedAt;
 
 	/**
 	 * エンティティ変換
@@ -37,7 +50,11 @@ public class Diary {
 		Diary diary = new Diary();
 
 		diary.setDiaryId(dto.getDiaryId());
-		diary.setUserId(dto.getUserId());
+		diary.setDiaryTitle(dto.getDiaryTitle());
+		diary.setDiaryContent(dto.getDiaryContent());
+		diary.setCreatedAt(dto.getCreatedAt());
+		diary.setUpdatedAt(dto.getUpdatedAt());
+		diary.setDeletedAt(dto.getDeletedAt());
 
 		return diary;
 	}
@@ -54,7 +71,11 @@ public class Diary {
 			Diary diary = new Diary();
 
 			diary.setDiaryId(dto.getDiaryId());
-			diary.setUserId(dto.getUserId());
+			diary.setDiaryTitle(dto.getDiaryTitle());
+			diary.setDiaryContent(dto.getDiaryContent());
+			diary.setCreatedAt(dto.getCreatedAt());
+			diary.setUpdatedAt(dto.getUpdatedAt());
+			diary.setDeletedAt(dto.getDeletedAt());
 
 			diaryList.add(diary);
 		}

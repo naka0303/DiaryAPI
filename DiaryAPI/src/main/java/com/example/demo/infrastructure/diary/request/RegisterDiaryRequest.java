@@ -1,5 +1,6 @@
 package com.example.demo.infrastructure.diary.request;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -13,5 +14,10 @@ public class RegisterDiaryRequest {
   private Integer userId;
 
   @NotNull
-  private Integer diaryId;
+  @NotBlank
+  private String diaryTitle;
+
+  @NotNull
+  @NotBlank
+  private String diaryContent;
 }
