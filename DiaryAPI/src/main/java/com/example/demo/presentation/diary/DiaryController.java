@@ -3,6 +3,7 @@ package com.example.demo.presentation.diary;
 import com.example.demo.application.diary.dto.FindDiaryDto;
 import com.example.demo.domain.diary.entity.Diary;
 import com.example.demo.infrastructure.diary.request.RegisterDiaryRequest;
+import com.example.demo.infrastructure.diary.request.UpdateDiaryRequest;
 import com.example.demo.infrastructure.diary.service.DiaryCommandService;
 import com.example.demo.infrastructure.diary.service.DiaryQueryService;
 import jakarta.validation.ValidationException;
@@ -28,39 +29,41 @@ public class DiaryController {
   DiaryCommandService diaryCommandService;
 
   /**
-   * 指定されたユーザーIDに紐づく日記情報取得.
+   * 指定されたユーザーに紐づく日記情報取得.
    *
    * @param userId ユーザーID
    * @return ユーザーIDに紐づく日記情報
    */
-  @GetMapping("/v1/diaries")
+  @GetMapping("/v1/users/{userId}/diaries")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<List<Diary>> findDiariesByUserId(
-      @RequestParam Integer userId) {
+  public ResponseEntity<List<Diary>> findDiariesByUser(
+      @PathVariable Integer userId) {
 
     Diary diary = new Diary();
 
     List<FindDiaryDto> dtoList =
-        diaryQueryService.findDiariesByUserId(userId);
+        diaryQueryService.findDiariesByUser(userId);
 
     return new ResponseEntity(diary.toEntityList(dtoList), HttpStatus.OK);
   }
 
   /**
-   * 指定された日記IDの日記情報取得.
+   * 指定された日記情報取得.
    *
+   * @param userId ユーザーID
    * @param diaryId 日記ID
-   * @return 指定された日記IDの日記情報
+   * @return 指定された日記情報
    */
-  @GetMapping("/v1/diaries/{diaryId}")
+  @GetMapping("/v1/users/{userId}/diaries/{diaryId}")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<List<Diary>> findDiaryById(
+  public ResponseEntity<List<Diary>> findDiaryByUser(
+      @PathVariable Integer userId,
       @PathVariable Integer diaryId) {
 
     Diary diary = new Diary();
 
     FindDiaryDto dto =
-        diaryQueryService.findDiaryById(diaryId);
+        diaryQueryService.findDiaryByUser(userId, diaryId);
 
     return new ResponseEntity(diary.toEntity(dto), HttpStatus.OK);
   }
@@ -71,9 +74,10 @@ public class DiaryController {
    * @param request 日記情報
    * @throws Exception 例外処理
    */
-  @PostMapping("/v1/diaries")
+  @PostMapping("/v1/users/{userId}/diaries")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<Object> registerDiaryByUserId(
+  public ResponseEntity<Object> registerDiary(
+      @PathVariable Integer userId,
       @Validated @RequestBody RegisterDiaryRequest request,
       BindingResult result) throws Exception {
 
@@ -81,8 +85,34 @@ public class DiaryController {
       throw new ValidationException();
     }
 
-    diaryCommandService.registerDiary(request);
+    diaryCommandService.registerDiary(userId, request);
 
     return ResponseEntity.ok(HttpStatus.OK);
   }
+
+  /**
+   * 日記更新.
+   *
+   * @param userId ユーザーID
+   * @param diaryId 日記ID
+   * @param request 日記情報
+   * @throws Exception 例外処理
+   */
+  @PutMapping("/v1/users/{userId}/diaries/{diaryId}")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<Object> updateDiary(
+      @PathVariable Integer userId,
+      @PathVariable Integer diaryId,
+      @Validated @RequestBody UpdateDiaryRequest request,
+      BindingResult result) throws Exception {
+
+    if (result.hasErrors()) {
+      throw new ValidationException();
+    }
+
+    diaryCommandService.updateDiary(userId, diaryId, request);
+
+    return ResponseEntity.ok(HttpStatus.OK);
+  }
+
 }

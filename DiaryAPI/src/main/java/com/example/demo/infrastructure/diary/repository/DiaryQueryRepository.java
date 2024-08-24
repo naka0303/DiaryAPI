@@ -11,18 +11,19 @@ import java.util.List;
 public interface DiaryQueryRepository {
 
     /**
-     * 指定されたユーザーIDに紐づく日記情報取得.
+     * 指定されたユーザーに紐づく日記情報取得.
      *
      * @param userId ユーザーID
-     * @return ユーザーIDに紐づく日記情報
+     * @return ユーザーに紐づく日記情報
      */
-    List<FindDiaryLinkedUserDto> findDiariesLinkedUser(Integer userId);
+    List<FindDiaryDto> findDiariesByUser(Integer userId);
 
     /**
-     * 指定された日記IDの日記情報取得.
+     * 指定された日記情報取得.
      *
+     * @param userId ユーザーID
      * @param diaryId 日記ID
      * @return 指定された日記IDの日記情報
      */
-    FindDiaryDto findDiaryById(Integer diaryId);
+    FindDiaryDto findDiaryByUser(Integer userId, Integer diaryId);
 }

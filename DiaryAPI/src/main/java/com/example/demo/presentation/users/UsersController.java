@@ -56,7 +56,6 @@ public class UsersController {
    * ユーザーIDでの特定ユーザー情報取得.
    *
    * @param userId ユーザーID
-   *
    * @return ユーザー情報
    */
   @GetMapping("/v1/users/{userId}")

@@ -5,10 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * RegisterDiaryRequestクラス.
+ * UpdateDiaryRequestクラス.
  */
 @Data
-public class RegisterDiaryRequest {
+public class UpdateDiaryRequest {
 
   @NotNull
   @NotBlank

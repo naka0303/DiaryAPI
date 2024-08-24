@@ -18,24 +18,25 @@ public class DiaryQueryRepositoryImpl implements DiaryQueryRepository {
   private final DiaryQueryMapper diaryQueryMapper;
 
   /**
-   * 指定されたユーザーIDに紐づく日記情報取得.
+   * 指定されたユーザーに紐づく日記情報取得.
    *
    * @param userId ユーザーID
-   * @return ユーザーIDに紐づく日記情報
+   * @return ユーザーに紐づく日記情報
    */
   @Override
-  public List<FindDiaryLinkedUserDto> findDiariesLinkedUser(Integer userId) {
-    return diaryQueryMapper.selectDiariesLinkedUser(userId);
+  public List<FindDiaryDto> findDiariesByUser(Integer userId) {
+    return diaryQueryMapper.selectDiariesByUser(userId);
   }
 
   /**
-   * 指定された日記IDの日記情報取得.
+   * 指定された日記情報取得.
    *
+   * @param userId ユーザーID
    * @param diaryId 日記ID
    * @return 指定された日記IDの日記情報
    */
   @Override
-  public FindDiaryDto findDiaryById(Integer diaryId) {
-    return diaryQueryMapper.selectDiaryById(diaryId);
+  public FindDiaryDto findDiaryByUser(Integer userId, Integer diaryId) {
+    return diaryQueryMapper.selectDiaryByUser(userId, diaryId);
   }
 }
