@@ -1,7 +1,7 @@
 package com.example.demo.infrastructure.diary.repository;
 
 import com.example.demo.application.diary.dto.FindDiaryDto;
-import com.example.demo.application.diary.dto.FindDiaryLinkedUserDto;
+import com.example.demo.domain.diary.entity.Diary;
 import com.example.demo.mapper.DiaryQueryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -25,7 +25,12 @@ public class DiaryQueryRepositoryImpl implements DiaryQueryRepository {
    */
   @Override
   public List<FindDiaryDto> findDiariesByUser(Integer userId) {
-    return diaryQueryMapper.selectDiariesByUser(userId);
+    List<FindDiaryDto> dtoList = diaryQueryMapper.selectDiariesByUser(userId);
+    if (dtoList == null) {
+      return null;
+    }
+
+    return new Diary().sort(dtoList);
   }
 
   /**
