@@ -31,7 +31,7 @@ public class LoginController {
       @RequestBody LoginUserRequest request) throws Exception {
     
     // 処理を実行
-    UserPrincipal userPrincipal = userLoginService. login(request);
+    UserPrincipal userPrincipal = userLoginService.login(request);
 
     return userPrincipal;
   }
