@@ -30,4 +30,12 @@ public interface DiaryCommandService {
    */
   void updateDiary(
       Integer userId, Integer diaryId, UpdateDiaryRequest request) throws Exception;
+
+  /**
+   * 日記削除.
+   *
+   * @param userId ユーザーID
+   * @param diaryId 日記ID
+   */
+  void deleteDiary(Integer userId, Integer diaryId) throws Exception;
 }

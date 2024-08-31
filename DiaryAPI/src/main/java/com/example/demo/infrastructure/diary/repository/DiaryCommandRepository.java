@@ -29,4 +29,13 @@ public interface DiaryCommandRepository {
    */
   void updateDiary(
       Integer userId, Integer diaryId, UpdateDiaryRequest request) throws Exception;
+
+  /**
+   * 日記削除.
+   *
+   * @param userId ユーザーID
+   * @param diaryId 注文ID
+   * @throws Exception 例外処理
+   */
+  void deleteDiary(Integer userId, Integer diaryId) throws Exception;
 }

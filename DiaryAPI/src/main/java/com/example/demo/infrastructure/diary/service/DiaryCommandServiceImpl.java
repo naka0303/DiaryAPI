@@ -42,4 +42,15 @@ public class DiaryCommandServiceImpl implements DiaryCommandService {
   public void updateDiary(Integer userId, Integer diaryId, UpdateDiaryRequest request) throws Exception {
     diaryCommandRepository.updateDiary(userId, diaryId, request);
   }
+
+  /**
+   * 日記削除.
+   *
+   * @param userId  ユーザーID
+   * @param diaryId 日記ID
+   */
+  @Override
+  public void deleteDiary(Integer userId, Integer diaryId) throws Exception {
+    diaryCommandRepository.deleteDiary(userId, diaryId);
+  }
 }

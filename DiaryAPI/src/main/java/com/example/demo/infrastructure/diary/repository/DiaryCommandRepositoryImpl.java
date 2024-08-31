@@ -78,4 +78,24 @@ public class DiaryCommandRepositoryImpl implements DiaryCommandRepository {
       throw new Exception("Update diary failed");
     }
   }
+
+  /**
+   * 日記削除.
+   *
+   * @param userId  ユーザーID
+   * @param diaryId 注文ID
+   */
+  @Override
+  public void deleteDiary(Integer userId, Integer diaryId) throws Exception {
+    final int deleteDiaryCnt = diaryCommandMapper.deleteDiary(diaryId);
+    if (deleteDiaryCnt != 1) {
+      throw new Exception("Delete diary failed");
+    }
+
+    final int deleteDiaryLinkedUserCnt =
+        diaryCommandMapper.deleteDiaryLinkedUser(userId, diaryId);
+    if (deleteDiaryLinkedUserCnt != 1) {
+      throw new Exception("Delete diary linked user failed");
+    }
+  }
 }

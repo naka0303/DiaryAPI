@@ -115,4 +115,22 @@ public class DiaryController {
     return ResponseEntity.ok(HttpStatus.OK);
   }
 
+  /**
+   * 日記削除.
+   *
+   * @param userId ユーザーID
+   * @param diaryId 日記ID
+   * @throws Exception 例外処理
+   */
+  @DeleteMapping("/v1/users/{userId}/diaries/{diaryId}")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<Object> deleteDiary(
+      @PathVariable Integer userId,
+      @PathVariable Integer diaryId) throws Exception {
+
+    diaryCommandService.deleteDiary(userId, diaryId);
+
+    return ResponseEntity.ok(HttpStatus.OK);
+  }
+
 }

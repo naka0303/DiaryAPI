@@ -40,4 +40,22 @@
       diary_id = #{diaryId}
   </update>
 
+  <delete id="deleteDiary">
+    DELETE
+      FROM
+        diaries d
+    WHERE
+      diary_id = #{diaryId}
+  </delete>
+  
+  <delete id="deleteDiaryLinkedUser">
+    DELETE
+      FROM
+        diaries_linked_users du
+    WHERE
+      diary_id = #{diaryId}
+    AND
+      user_id = #{userId}
+  </delete>
+
 </mapper>

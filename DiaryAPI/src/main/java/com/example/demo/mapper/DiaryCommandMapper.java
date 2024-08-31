@@ -46,4 +46,22 @@ public interface DiaryCommandMapper {
       @Param("diaryId") Integer diaryId,
       @Param("diaryTitle") String diaryTitle,
       @Param("diaryContent") String diaryContent);
+
+  /**
+   * 日記削除.
+   *
+   * @param diaryId 日記ID
+   */
+  int deleteDiary(
+      @Param("diaryId") Integer diaryId);
+
+  /**
+   * 日記とユーザーの紐づきを削除
+   *
+   * @param userId ユーザーID
+   * @param diaryId 日記ID
+   */
+  int deleteDiaryLinkedUser(
+      @Param("userId") Integer userId,
+      @Param("diaryId") Integer diaryId);
 }
