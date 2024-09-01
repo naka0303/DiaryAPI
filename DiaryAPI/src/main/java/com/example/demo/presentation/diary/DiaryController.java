@@ -37,7 +37,7 @@ public class DiaryController {
   @GetMapping("/v1/users/{userId}/diaries")
   @CrossOrigin("http://localhost:4200")
   public ResponseEntity<List<Diary>> findDiariesByUser(
-      @PathVariable Integer userId) {
+      @PathVariable Integer userId) throws Exception {
 
     Diary diary = new Diary();
 

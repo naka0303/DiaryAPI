@@ -14,7 +14,7 @@
 			diaries d
 			LEFT JOIN diaries_linked_users du
 				ON d.diary_id = du.diary_id
-		AND
+		WHERE
 			du.user_id = #{userId}
 	</select>
 

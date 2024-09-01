@@ -1,4 +1,4 @@
-package com.example.demo.presentation.users;
+package com.example.demo.presentation.user;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,7 +30,7 @@ import jakarta.validation.ValidationException;
  * ユーザーAPIコントローラー.
  */
 @RestController
-public class UsersController {
+public class UserController {
   
   @Autowired
   UsersService usersService;

@@ -27,7 +27,10 @@ public class DiaryQueryServiceImpl implements DiaryQueryService {
    * @return ユーザーに紐づく日記情報
    */
   @Override
-  public List<FindDiaryDto> findDiariesByUser(Integer userId) {
+  public List<FindDiaryDto> findDiariesByUser(Integer userId) throws Exception {
+    if (userId == null) {
+      throw new Exception("userId is null");
+    }
     return diaryQueryRepository.findDiariesByUser(userId);
   }
 

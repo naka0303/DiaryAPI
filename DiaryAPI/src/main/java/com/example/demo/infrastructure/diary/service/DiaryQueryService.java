@@ -17,7 +17,7 @@ public interface DiaryQueryService {
    * @param userId ユーザーID
    * @return ユーザーIDに紐づく日記情報
    */
-  List<FindDiaryDto> findDiariesByUser(Integer userId);
+  List<FindDiaryDto> findDiariesByUser(Integer userId) throws Exception;
 
   /**
    * 指定された日記情報取得.
