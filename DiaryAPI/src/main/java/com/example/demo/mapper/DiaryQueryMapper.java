@@ -28,4 +28,10 @@ public interface DiaryQueryMapper {
   FindDiaryDto selectDiaryByUser(
       @Param("userId") Integer userId,
       @Param("diaryId") Integer diaryId);
+
+  /**
+   * 全ての日記情報取得
+   * @return 日記情報
+   */
+  List<FindDiaryDto> selectDiaries();
 }

@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.DiaryQueryMapper">
 
+	<select id="selectDiaries" resultType="com.example.demo.application.diary.dto.FindDiaryDto">
+		SELECT
+			d.diary_id
+			, d.diary_title
+			, d.diary_content
+			, d.created_at
+			, d.updated_at
+			, d.deleted_at
+		FROM
+			diaries d
+		LEFT JOIN diaries_linked_users du
+			ON d.diary_id = du.diary_id
+	</select>
+
 	<select id="selectDiariesByUser" resultType="com.example.demo.application.diary.dto.FindDiaryDto">
 		SELECT
 			d.diary_id

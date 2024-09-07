@@ -29,6 +29,24 @@ public class DiaryController {
   DiaryCommandService diaryCommandService;
 
   /**
+   * 全ての日記情報取得.
+   *
+   * @return 日記情報
+   * @throws Exception
+   */
+  @GetMapping("/v1/diaries")
+  @CrossOrigin("http://localhost:4200")
+  public ResponseEntity<List<Diary>> findDiaries() throws Exception {
+
+    Diary diary = new Diary();
+
+    List<FindDiaryDto> dtoList =
+        diaryQueryService.findDiaries();
+
+    return new ResponseEntity(diary.toEntityList(dtoList), HttpStatus.OK);
+  }
+
+  /**
    * 指定されたユーザーに紐づく日記情報取得.
    *
    * @param userId ユーザーID

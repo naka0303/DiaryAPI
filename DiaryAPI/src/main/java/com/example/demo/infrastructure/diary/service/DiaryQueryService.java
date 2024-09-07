@@ -27,4 +27,11 @@ public interface DiaryQueryService {
    * @return 指定された日記情報
    */
   FindDiaryDto findDiaryByUser(Integer userId, Integer diaryId);
+
+  /**
+   * 全ての日記情報取得.
+   *
+   * @return 日記情報
+   */
+  List<FindDiaryDto> findDiaries();
 }

@@ -44,4 +44,14 @@ public class DiaryQueryRepositoryImpl implements DiaryQueryRepository {
   public FindDiaryDto findDiaryByUser(Integer userId, Integer diaryId) {
     return diaryQueryMapper.selectDiaryByUser(userId, diaryId);
   }
+
+  /**
+   * 全ての日記情報取得
+   *
+   * @return 日記情報
+   */
+  @Override
+  public List<FindDiaryDto> findDiaries() {
+    return diaryQueryMapper.selectDiaries();
+  }
 }
