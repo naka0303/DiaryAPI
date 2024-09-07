@@ -11,10 +11,10 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS diaries (
-    diary_id INTEGER NOT NULL PRIMARY KEY
-    , diary_title VARCHAR (255)
-    , diary_content TEXT
-    , created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  diary_id INTEGER NOT NULL PRIMARY KEY
+  , diary_title VARCHAR (255)
+  , diary_content TEXT
+  , created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	, updated_at TIMESTAMP DEFAULT NULL
 	, deleted_at TIMESTAMP DEFAULT NULL
 );
@@ -23,3 +23,13 @@ CREATE TABLE IF NOT EXISTS diaries_linked_users (
 	diary_id SERIAL NOT NULL PRIMARY KEY
 	, user_id INTEGER NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS comments (
+  diary_id SERIAL NOT NULL
+  , user_id INTEGER NOT NULL
+  , comment TEXT NOT NULL
+  , created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  , updated_at TIMESTAMP DEFAULT NULL
+  , deleted_at TIMESTAMP DEFAULT NULL
+)
+
