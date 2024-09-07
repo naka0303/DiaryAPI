@@ -2,6 +2,7 @@ package com.example.demo.domain.users.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,11 +49,14 @@ public class Users {
   private Integer diaryId;
   
   @Column(name = "created_at")
+  @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
   private LocalDateTime createdAt;
   
   @Column(name = "updated_at")
+  @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
   private LocalDateTime updatedAt;
   
   @Column(name = "deleted_at")
+  @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
   private LocalDateTime deletedAt;
 }

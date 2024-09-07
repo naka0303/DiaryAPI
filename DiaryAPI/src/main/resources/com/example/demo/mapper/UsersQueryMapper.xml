@@ -8,13 +8,8 @@
           ,  u.age
           ,  u.email
           ,  u.auth
-          ,  u.diary_id
         FROM
           users u
-        LEFT JOIN
-          diaries d
-        ON
-          u.user_id = d.user_id
         ORDER BY
           u.user_id ASC
     </select>
@@ -26,13 +21,8 @@
           ,  u.age
           ,  u.email
           ,  u.auth
-          ,  u.diary_id
         FROM
           users u
-        LEFT JOIN
-          diaries d
-        ON
-          u.user_id = d.user_id
         WHERE
           u.user_id = #{userId}
     </select>
@@ -45,13 +35,8 @@
           ,  u.email
           ,  u.password
           ,  u.auth
-          ,  u.diary_id
         FROM
           users u
-        LEFT JOIN
-          diaries d
-        ON
-          u.user_id = d.user_id
         WHERE
           u.username = #{username}
     </select>

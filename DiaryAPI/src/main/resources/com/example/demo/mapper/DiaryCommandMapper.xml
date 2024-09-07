@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.DiaryCommandMapper">
-    <insert id="insertDiaryByUserId" keyProperty="diary_id"
-        parameterType="com.example.demo.infrastructure.diary.request.RegisterDiaryRequest">
 
-        INSERT INTO diaries
-        (
-            user_id
-        )
-        VALUES
-        (
-            #{userId}
-        )
-    </insert>
+  <insert id="insertDiaryLinkedUser" useGeneratedKeys="true" keyProperty="diaryId" parameterType="com.example.demo.infrastructure.diary.request.RegisterDiaryRequest">
+    INSERT INTO diaries_linked_users
+      (
+        user_id
+      )
+    VALUES
+      (
+        #{diaryLinkedUser.userId}
+      )
+  </insert>
+
+  <insert id="insertDiary" keyProperty="diaryId" parameterType="com.example.demo.infrastructure.diary.request.RegisterDiaryRequest">
+    INSERT INTO diaries
+      (
+        diary_id
+        ,  diary_title
+        ,  diary_content
+        ,  created_at
+      )
+    VALUES
+      (
+        #{diaryId}
+        ,  #{diaryTitle}
+        ,  #{diaryContent}
+        ,  CURRENT_TIMESTAMP
+      )
+  </insert>
+
+  <update id="updateDiary">
+    UPDATE diaries
+    SET
+      diary_title = #{diaryTitle}
+      ,  diary_content = #{diaryContent}
+      ,  updated_at = now()
+    WHERE
+      diary_id = #{diaryId}
+  </update>
+
+  <delete id="deleteDiary">
+    DELETE
+      FROM
+        diaries d
+    WHERE
+      diary_id = #{diaryId}
+  </delete>
+  
+  <delete id="deleteDiaryLinkedUser">
+    DELETE
+      FROM
+        diaries_linked_users du
+    WHERE
+      diary_id = #{diaryId}
+    AND
+      user_id = #{userId}
+  </delete>
+
 </mapper>

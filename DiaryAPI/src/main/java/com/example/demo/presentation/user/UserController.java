@@ -1,4 +1,4 @@
-package com.example.demo.presentation.users;
+package com.example.demo.presentation.user;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,7 +30,7 @@ import jakarta.validation.ValidationException;
  * ユーザーAPIコントローラー.
  */
 @RestController
-public class UsersController {
+public class UserController {
   
   @Autowired
   UsersService usersService;
@@ -56,7 +56,6 @@ public class UsersController {
    * ユーザーIDでの特定ユーザー情報取得.
    *
    * @param userId ユーザーID
-   *
    * @return ユーザー情報
    */
   @GetMapping("/v1/users/{userId}")

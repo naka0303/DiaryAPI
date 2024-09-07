@@ -1,4 +1,4 @@
-package com.example.demo.infrastructure.diaryContent.request;
+package com.example.demo.infrastructure.diary.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

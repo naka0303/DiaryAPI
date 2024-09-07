@@ -30,17 +30,22 @@ public class WebSecurityConfig {
   protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
     http.csrf()
-            .disable()
-            .authorizeHttpRequests(authz -> authz
-                    .requestMatchers(HttpMethod.POST, "/v1/login").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/v1/logout").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/v1/users/**").permitAll()
-                    .requestMatchers(HttpMethod.DELETE, "/v1/users/**").permitAll()
-                    .requestMatchers(HttpMethod.PUT, "/v1/users/**").permitAll()
-                    .requestMatchers("/v1/users").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/v1/diary-contents/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/v1/diary-contents/**").permitAll()
-                    .anyRequest().authenticated());
+        .disable()
+        .authorizeHttpRequests(authz -> authz
+            .requestMatchers(HttpMethod.POST, "/v1/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/v1/logout").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/users/**").permitAll()
+            .requestMatchers(HttpMethod.DELETE, "/v1/users/**").permitAll()
+            .requestMatchers(HttpMethod.PUT, "/v1/users/**").permitAll()
+            .requestMatchers("/v1/users").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/users/{userId}/diaries").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/users/{userId}/diaries/{diaryId}").permitAll()
+            .requestMatchers(HttpMethod.POST, "/v1/users/{userId}/diaries").permitAll()
+            .requestMatchers(HttpMethod.PUT, "/v1/users/{userId}/diaries/{diaryId}").permitAll()
+            .requestMatchers(HttpMethod.DELETE, "/v1/users/{userId}/diaries/{diaryId}").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/diaries").permitAll()
+            .requestMatchers(HttpMethod.POST, "/v1/diaries/{diaryId}/comments").permitAll()
+            .anyRequest().authenticated());
 
     return http.build();
   }
