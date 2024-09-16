@@ -44,7 +44,9 @@ public class WebSecurityConfig {
             .requestMatchers(HttpMethod.PUT, "/v1/users/{userId}/diaries/{diaryId}").permitAll()
             .requestMatchers(HttpMethod.DELETE, "/v1/users/{userId}/diaries/{diaryId}").permitAll()
             .requestMatchers(HttpMethod.GET, "/v1/diaries").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/diaries/{diaryId}/comments").permitAll()
             .requestMatchers(HttpMethod.POST, "/v1/diaries/{diaryId}/comments").permitAll()
+            .requestMatchers(HttpMethod.POST, "/v1/diaries/{diaryId}/comments/{commentId}/reply").permitAll()
             .anyRequest().authenticated());
 
     return http.build();

@@ -11,7 +11,7 @@ import lombok.Data;
 public class RegisterCommentRequest {
 
   @NotNull
-  private Integer userId;
+  private Integer commentFrom;
 
   @NotNull
   @NotBlank

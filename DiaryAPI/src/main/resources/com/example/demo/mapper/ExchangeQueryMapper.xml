@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ExchangeQueryMapper">
+
+	<select id="findComments" resultType="com.example.demo.application.exchange.dto.FindCommentLinkedUserDto">
+		SELECT
+		  c.comment_id
+			, c.diary_id
+			, c.comment_from
+		  , u.username
+		  , u.age
+		  , u.email
+			, c.comment
+			, c.created_at
+			, c.updated_at
+			, c.deleted_at
+		FROM
+			comments c
+		LEFT JOIN users u
+		  ON c.comment_from = u.user_id
+	</select>
+
+</mapper>
