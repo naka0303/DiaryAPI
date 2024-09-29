@@ -1,6 +1,7 @@
 package com.example.demo.domain.diary_linked_user;
 
 import com.example.demo.application.diary.dto.FindDiaryLinkedUserDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -26,10 +27,13 @@ public class DiaryLinkedUserData {
 
 	private String auth;
 
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
 	private LocalDateTime createdAt;
 
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
 	private LocalDateTime updatedAt;
 
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
 	private LocalDateTime deletedAt;
 
 	/**
