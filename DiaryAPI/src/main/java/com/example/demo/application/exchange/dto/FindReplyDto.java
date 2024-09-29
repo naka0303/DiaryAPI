@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class FindCommentLinkedUserDto {
+public class FindReplyDto {
 
   private Integer diaryId;
 
@@ -15,11 +15,11 @@ public class FindCommentLinkedUserDto {
 
   private Integer commentFrom;
 
-  private String username;
+  private Integer replyNo;
 
-  private Integer age;
+  private Integer replyTo;
 
-  private String email;
+  private Integer replyFrom;
 
   private String content;
 

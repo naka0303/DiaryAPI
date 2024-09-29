@@ -3,35 +3,41 @@
 <mapper namespace="com.example.demo.mapper.ExchangeCommandMapper">
 
   <insert id="insertComment" parameterType="com.example.demo.infrastructure.exchange.request.RegisterCommentRequest">
-    INSERT INTO comments
+    INSERT INTO comments_and_replies
       (
         diary_id
+        , comment_no
         , comment_from
-        , comment
+        , content
         , created_at
       )
     VALUES
       (
         #{diaryId}
+        , #{commentNo}
         , #{commentFrom}
-        , #{comment}
+        , #{content}
         , CURRENT_TIMESTAMP
       )
   </insert>
 
   <insert id="insertReply" parameterType="com.example.demo.infrastructure.exchange.request.RegisterReplyRequest">
-    INSERT INTO reply
+    INSERT INTO comments_and_replies
       (
-        comment_id
+        diary_id
+        , reply_no
+        , reply_to
         , reply_from
-        , reply_comment
+        , content
         , created_at
       )
     VALUES
       (
-        #{commentId}
+        #{diaryId}
+        , #{replyNo}
+        , #{replyTo}
         , #{replyFrom}
-        , #{replyComment}
+        , #{content}
         , CURRENT_TIMESTAMP
       )
   </insert>

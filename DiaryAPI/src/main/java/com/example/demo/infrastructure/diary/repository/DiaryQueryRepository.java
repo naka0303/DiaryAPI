@@ -32,5 +32,5 @@ public interface DiaryQueryRepository {
      *
      * @return 日記情報
      */
-    List<FindDiaryDto> findDiaries();
+    List<FindDiaryLinkedUserDto> findDiaries();
 }

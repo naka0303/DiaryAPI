@@ -24,21 +24,14 @@ CREATE TABLE IF NOT EXISTS diaries_linked_users (
 	, user_id INTEGER NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS comments (
-  comment_id SERIAL NOT NULL PRIMARY KEY
-  , diary_id INTEGER NOT NULL
-  , comment_from INTEGER NOT NULL
-  , comment TEXT NOT NULL
-  , created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  , updated_at TIMESTAMP DEFAULT NULL
-  , deleted_at TIMESTAMP DEFAULT NULL
-);
-
-CREATE TABLE IF NOT EXISTS reply (
-  reply_id SERIAL NOT NULL PRIMARY KEY
-  , comment_id INTEGER NOT NULL
-  , reply_from INTEGER NOT NULL
-  , reply_comment TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS comments_and_replies (
+  diary_id INTEGER NOT NULL
+  , comment_no INTEGER
+  , comment_from INTEGER
+  , reply_no INTEGER
+  , reply_to INTEGER
+  , reply_from INTEGER
+  , content TEXT NOT NULL
   , created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   , updated_at TIMESTAMP DEFAULT NULL
   , deleted_at TIMESTAMP DEFAULT NULL

@@ -1,6 +1,7 @@
 package com.example.demo.infrastructure.exchange.service;
 
 import com.example.demo.application.exchange.dto.FindCommentLinkedUserDto;
+import com.example.demo.application.exchange.dto.FindCommentReplyLinkedUserDto;
 import com.example.demo.infrastructure.exchange.repository.ExchangeQueryRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,13 @@ public class ExchangeQueryServiceImpl implements ExchangeQueryService {
   }
 
   /**
-   * 指定された日記のコメントを全て取得
+   * 指定された日記のコメントを全て取得.
    *
    * @param diaryId 日記ID
    * @return コメント情報
    */
   @Override
-  public List<FindCommentLinkedUserDto> findComments(Integer diaryId) {
-    return exchangeQueryRepository.findComments(diaryId);
+  public List<FindCommentReplyLinkedUserDto> findCommentsReplies(Integer diaryId) {
+    return exchangeQueryRepository.findCommentsReplies(diaryId);
   }
 }

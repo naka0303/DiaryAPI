@@ -1,6 +1,6 @@
 package com.example.demo.infrastructure.exchange.service;
 
-import com.example.demo.application.exchange.dto.FindCommentLinkedUserDto;
+import com.example.demo.application.exchange.dto.FindCommentReplyLinkedUserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,5 +16,5 @@ public interface ExchangeQueryService {
    * @param diaryId 日記ID
    * @return コメント情報
    */
-  List<FindCommentLinkedUserDto> findComments(Integer diaryId);
+  List<FindCommentReplyLinkedUserDto> findCommentsReplies(Integer diaryId);
 }

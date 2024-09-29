@@ -18,17 +18,17 @@ public class CommentLinkedUser {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @NotNull
-  @Column(name = "comment_id")
-  private Integer commentId;
-
-  @NotNull
   @Column(name = "diary_id")
   private Integer diaryId;
 
-  @NotNull
+  @Column(name = "comment_no")
+  private Integer commentNo;
+
   @Column(name = "comment_from")
   private Integer commentFrom;
+
+  @Column(name = "content")
+  private String content;
 
   @NotNull
   @NotBlank
@@ -44,10 +44,6 @@ public class CommentLinkedUser {
   @NotBlank
   @Column(name = "email")
   private String email;
-
-  @NotNull
-  @Column(name = "comment")
-  private String comment;
 
   @Column(name = "created_at")
   @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Tokyo")
@@ -70,13 +66,13 @@ public class CommentLinkedUser {
 
     CommentLinkedUser commentLinkedUser = new CommentLinkedUser();
 
-    commentLinkedUser.setCommentId(dto.getCommentId());
     commentLinkedUser.setDiaryId(dto.getDiaryId());
+    commentLinkedUser.setCommentNo(dto.getCommentNo());
     commentLinkedUser.setCommentFrom(dto.getCommentFrom());
+    commentLinkedUser.setContent(dto.getContent());
     commentLinkedUser.setUsername(dto.getUsername());
     commentLinkedUser.setAge(dto.getAge());
     commentLinkedUser.setEmail(dto.getEmail());
-    commentLinkedUser.setComment(dto.getComment());
     commentLinkedUser.setCreatedAt(dto.getCreatedAt());
     commentLinkedUser.setUpdatedAt(dto.getUpdatedAt());
     commentLinkedUser.setDeletedAt(dto.getDeletedAt());
@@ -86,30 +82,30 @@ public class CommentLinkedUser {
 
   /**
    * エンティティリスト変換
-   * @param dtoList FindCommentDtoリスト
+   * @param dtoList FindCommentLinkedUserDtoリスト
    * @return CommentLinkedUserエンティティリスト
    */
   public List<CommentLinkedUser> toEntityList(List<FindCommentLinkedUserDto> dtoList) {
-    List<CommentLinkedUser> commentLinkedUserList = new ArrayList<>();
+    List<CommentLinkedUser> allCommentLinkedUser = new ArrayList<>();
 
     for (FindCommentLinkedUserDto dto : dtoList) {
       CommentLinkedUser commentLinkedUser = new CommentLinkedUser();
 
-      commentLinkedUser.setCommentId(dto.getCommentId());
       commentLinkedUser.setDiaryId(dto.getDiaryId());
+      commentLinkedUser.setCommentNo(dto.getCommentNo());
       commentLinkedUser.setCommentFrom(dto.getCommentFrom());
+      commentLinkedUser.setContent(dto.getContent());
       commentLinkedUser.setUsername(dto.getUsername());
       commentLinkedUser.setAge(dto.getAge());
       commentLinkedUser.setEmail(dto.getEmail());
-      commentLinkedUser.setComment(dto.getComment());
       commentLinkedUser.setCreatedAt(dto.getCreatedAt());
       commentLinkedUser.setUpdatedAt(dto.getUpdatedAt());
       commentLinkedUser.setDeletedAt(dto.getDeletedAt());
 
-      commentLinkedUserList.add(commentLinkedUser);
+      allCommentLinkedUser.add(commentLinkedUser);
     }
 
-    return commentLinkedUserList;
+    return allCommentLinkedUser;
   }
 
   /**
@@ -117,6 +113,7 @@ public class CommentLinkedUser {
    * @return 投稿コメントリスト
    */
   public List<FindCommentLinkedUserDto> sort(List<FindCommentLinkedUserDto> commentList) {
-    return commentList.stream().sorted(Comparator.comparing(FindCommentLinkedUserDto::getCreatedAt)).toList();
+    return commentList.stream().sorted(
+        Comparator.comparing(FindCommentLinkedUserDto::getCreatedAt)).toList();
   }
 }

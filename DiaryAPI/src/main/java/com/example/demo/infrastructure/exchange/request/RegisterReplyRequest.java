@@ -8,7 +8,9 @@ import lombok.Data;
 @Data
 public class RegisterReplyRequest {
 
+  private Integer replyTo;
+
   private Integer replyFrom;
 
-  private String replyComment;
+  private String content;
 }

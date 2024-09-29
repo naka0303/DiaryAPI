@@ -26,21 +26,18 @@ public class ExchangeCommandServiceImpl implements ExchangeCommandService {
    */
   @Override
   public void registerComment(Integer diaryId, RegisterCommentRequest request) throws Exception {
-    exchangeCommandRepository.registerComment(
-        diaryId, request);
+    exchangeCommandRepository.registerComment(diaryId, request);
   }
 
   /**
-   * コメント返信.
+   * 返信投稿.
    *
-   * @param diaryId   日記ID
-   * @param commentId コメントID
-   * @param request   登録内容
+   * @param diaryId 日記ID
+   * @param request 登録内容
+   * @throws Exception 例外処理
    */
   @Override
-  public void registerReply(
-      Integer diaryId, Integer commentId, RegisterReplyRequest request) throws Exception {
-    exchangeCommandRepository.registerReply(
-        diaryId, commentId, request);
+  public void registerReply(Integer diaryId, RegisterReplyRequest request) throws Exception {
+    exchangeCommandRepository.registerReply(diaryId, request);
   }
 }

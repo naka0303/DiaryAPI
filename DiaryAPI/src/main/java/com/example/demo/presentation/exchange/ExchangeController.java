@@ -1,7 +1,7 @@
 package com.example.demo.presentation.exchange;
 
-import com.example.demo.application.exchange.dto.FindCommentLinkedUserDto;
-import com.example.demo.domain.comment.entity.CommentLinkedUser;
+import com.example.demo.application.exchange.dto.FindCommentReplyLinkedUserDto;
+import com.example.demo.domain.comment.entity.CommentAndReplyLinkedUser;
 import com.example.demo.infrastructure.exchange.request.RegisterCommentRequest;
 import com.example.demo.infrastructure.exchange.request.RegisterReplyRequest;
 import com.example.demo.infrastructure.exchange.service.ExchangeCommandService;
@@ -29,27 +29,27 @@ public class ExchangeController {
   ExchangeQueryService exchangeQueryService;
 
   /**
-   * 指定された日記のコメント取得
+   * 指定された日記のコメント/返信取得.
    * @param diaryId 日記ID
    * @return
    * @throws Exception
    */
-  @GetMapping("/v1/diaries/{diaryId}/comments")
+  @GetMapping("/v1/diaries/{diaryId}/comments-replies")
   @CrossOrigin("http://localhost:4200")
-  public ResponseEntity<Object> findComments(
+  public ResponseEntity<Object> findCommentsReplies(
       @PathVariable Integer diaryId) throws Exception {
 
-    CommentLinkedUser commentLinkedUser = new CommentLinkedUser();
+    CommentAndReplyLinkedUser commentLinkedUser = new CommentAndReplyLinkedUser();
 
     // コメント取得
-    List<FindCommentLinkedUserDto> dtoList =
-        exchangeQueryService.findComments(diaryId);
+    List<FindCommentReplyLinkedUserDto> dtoList =
+        exchangeQueryService.findCommentsReplies(diaryId);
 
     return new ResponseEntity(commentLinkedUser.toEntityList(dtoList), HttpStatus.OK);
   }
 
   /**
-   * コメント投稿
+   * コメント投稿.
    * @param diaryId 日記ID
    * @param request 登録内容
    * @throws Exception 例外処理
@@ -66,17 +66,23 @@ public class ExchangeController {
     }
 
     // コメント投稿
-    exchangeCommandService.registerComment(
-        diaryId, request);
+    exchangeCommandService.registerComment(diaryId, request);
 
     return ResponseEntity.ok(HttpStatus.OK);
   }
 
-  @PostMapping("/v1/diaries/{diaryId}/comments/{commentId}/reply")
+  /**
+   * 返信投稿.
+   * @param diaryId 日記ID
+   * @param commentNo コメント番号
+   * @param request 登録内容
+   * @throws Exception 例外処理
+   */
+  @PostMapping("/v1/diaries/{diaryId}/comments/{commentNo}/replies")
   @CrossOrigin("http://localhost:4200")
   public ResponseEntity<Object> registerReply(
       @PathVariable Integer diaryId,
-      @PathVariable Integer commentId,
+      @PathVariable Integer commentNo,
       @Validated @RequestBody RegisterReplyRequest request,
       BindingResult result) throws Exception {
 
@@ -84,9 +90,8 @@ public class ExchangeController {
       throw new ValidationException();
     }
 
-    // コメント返信
-    exchangeCommandService.registerReply(
-        diaryId, commentId, request);
+    // コメント投稿
+    exchangeCommandService.registerReply(diaryId, request);
 
     return ResponseEntity.ok(HttpStatus.OK);
   }

@@ -1,7 +1,5 @@
 package com.example.demo.mapper;
 
-import com.example.demo.domain.diary_linked_user.DiaryLinkedUser;
-import com.example.demo.infrastructure.exchange.request.RegisterReplyRequest;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,23 +13,29 @@ public interface ExchangeCommandMapper {
    * コメント投稿.
    *
    * @param diaryId 日記ID
+   * @param commentNo コメント番号
    * @param commentFrom コメント元
    * @param comment コメント内容
    */
   int insertComment(
       @Param("diaryId") Integer diaryId,
+      @Param("commentNo") Integer commentNo,
       @Param("commentFrom") Integer commentFrom,
-      @Param("comment") String comment);
+      @Param("content") String comment);
 
   /**
-   * コメント返信.
+   * 返信投稿.
    *
-   * @param commentId コメントID
+   * @param diaryId 日記ID
+   * @param replyNo 返信番号
+   * @param replyTo 返信先
    * @param replyFrom 返信元
-   * @param replyComment 返信内容
+   * @param content 返信内容
    */
   int insertReply(
-      @Param("commentId") Integer commentId,
+      @Param("diaryId") Integer diaryId,
+      @Param("replyNo") Integer replyNo,
+      @Param("replyTo") Integer replyTo,
       @Param("replyFrom") Integer replyFrom,
-      @Param("replyComment") String replyComment);
+      @Param("content") String content);
 }

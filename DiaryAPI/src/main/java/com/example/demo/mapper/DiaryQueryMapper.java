@@ -33,5 +33,5 @@ public interface DiaryQueryMapper {
    * 全ての日記情報取得
    * @return 日記情報
    */
-  List<FindDiaryDto> selectDiaries();
+  List<FindDiaryLinkedUserDto> selectDiaries();
 }

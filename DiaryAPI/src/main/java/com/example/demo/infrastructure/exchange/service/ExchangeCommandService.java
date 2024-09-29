@@ -20,11 +20,11 @@ public interface ExchangeCommandService {
       Integer diaryId, RegisterCommentRequest request) throws Exception;
 
   /**
-   * コメント返信.
+   * 返信投稿.
    * @param diaryId 日記ID
-   * @param commentId コメントID
    * @param request 登録内容
+   * @throws Exception 例外処理
    */
   void registerReply(
-      Integer diaryId, Integer commentId, RegisterReplyRequest request) throws Exception;
+      Integer diaryId, RegisterReplyRequest request) throws Exception;
 }

@@ -2,22 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ExchangeQueryMapper">
 
-	<select id="findComments" resultType="com.example.demo.application.exchange.dto.FindCommentLinkedUserDto">
+	<select id="findCommentsReplies" resultType="com.example.demo.application.exchange.dto.FindCommentReplyLinkedUserDto">
 		SELECT
-		  c.comment_id
-			, c.diary_id
+		  c.diary_id
+			, c.comment_no
 			, c.comment_from
-		  , u.username
-		  , u.age
-		  , u.email
-			, c.comment
+			, c.reply_no
+			, c.reply_to
+			, c.reply_from
+			, u.username
+			, u.age
+			, u.email
+			, c.content
 			, c.created_at
 			, c.updated_at
 			, c.deleted_at
 		FROM
-			comments c
+		  comments_and_replies c
+		LEFT JOIN users u
+		  ON c.comment_from = u.user_id OR c.reply_from = u.user_id
+		WHERE
+			c.diary_id = #{diaryId}
+		ORDER BY
+			c.created_at, c.updated_at
+	</select>
+
+	<select id="findCommentsByComment" resultType="com.example.demo.application.exchange.dto.FindCommentLinkedUserDto">
+		SELECT
+			c.diary_id
+			, c.comment_no
+			, c.comment_from
+			, u.username
+			, u.age
+			, u.email
+			, c.content
+			, c.created_at
+			, c.updated_at
+			, c.deleted_at
+		FROM
+		  comments_and_replies c
 		LEFT JOIN users u
 		  ON c.comment_from = u.user_id
+		WHERE
+			c.diary_id = #{diaryId}
+		AND
+			c.comment_no = #{replyTo}
+		ORDER BY
+			c.created_at, c.updated_at
+	</select>
+
+	<select id="findRepliesByComment" resultType="com.example.demo.application.exchange.dto.FindReplyDto">
+		SELECT
+			c.diary_id
+			, c.comment_no
+			, c.comment_from
+			, c.reply_no
+			, c.reply_to
+			, c.reply_from
+			, u.username
+			, u.age
+			, u.email
+			, c.content
+			, c.created_at
+			, c.updated_at
+			, c.deleted_at
+		FROM
+		  comments_and_replies c
+		LEFT JOIN users u
+		  ON c.comment_from = u.user_id
+		WHERE
+			c.diary_id = #{diaryId}
+		AND
+			c.reply_to = #{replyTo}
+		ORDER BY
+			c.created_at, c.updated_at
 	</select>
 
 </mapper>

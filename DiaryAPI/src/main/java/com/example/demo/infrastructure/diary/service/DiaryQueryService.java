@@ -1,6 +1,7 @@
 package com.example.demo.infrastructure.diary.service;
 
 import com.example.demo.application.diary.dto.FindDiaryDto;
+import com.example.demo.application.diary.dto.FindDiaryLinkedUserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +34,5 @@ public interface DiaryQueryService {
    *
    * @return 日記情報
    */
-  List<FindDiaryDto> findDiaries();
+  List<FindDiaryLinkedUserDto> findDiaries();
 }

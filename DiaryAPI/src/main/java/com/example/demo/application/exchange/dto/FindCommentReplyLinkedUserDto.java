@@ -1,4 +1,4 @@
-package com.example.demo.application.diary.dto;
+package com.example.demo.application.exchange.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,15 +7,19 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class FindDiaryLinkedUserDto {
+public class FindCommentReplyLinkedUserDto {
 
   private Integer diaryId;
 
-  private String diaryTitle;
+  private Integer commentNo;
 
-  private String diaryContent;
+  private Integer commentFrom;
 
-  private Integer userId;
+  private Integer replyNo;
+
+  private Integer replyTo;
+
+  private Integer replyFrom;
 
   private String username;
 
@@ -23,7 +27,7 @@ public class FindDiaryLinkedUserDto {
 
   private String email;
 
-  private String auth;
+  private String content;
 
   private LocalDateTime createdAt;
 

@@ -1,6 +1,7 @@
 package com.example.demo.infrastructure.diary.service;
 
 import com.example.demo.application.diary.dto.FindDiaryDto;
+import com.example.demo.application.diary.dto.FindDiaryLinkedUserDto;
 import com.example.demo.infrastructure.diary.repository.DiaryQueryRepository;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class DiaryQueryServiceImpl implements DiaryQueryService {
    * @return 日記情報
    */
   @Override
-  public List<FindDiaryDto> findDiaries() {
+  public List<FindDiaryLinkedUserDto> findDiaries() {
     return diaryQueryRepository.findDiaries();
   }
 }

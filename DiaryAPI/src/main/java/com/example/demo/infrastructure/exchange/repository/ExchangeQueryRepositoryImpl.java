@@ -1,6 +1,6 @@
 package com.example.demo.infrastructure.exchange.repository;
 
-import com.example.demo.application.exchange.dto.FindCommentLinkedUserDto;
+import com.example.demo.application.exchange.dto.FindCommentReplyLinkedUserDto;
 import com.example.demo.mapper.ExchangeQueryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -23,7 +23,7 @@ public class ExchangeQueryRepositoryImpl implements ExchangeQueryRepository {
    * @return コメント情報
    */
   @Override
-  public List<FindCommentLinkedUserDto> findComments(Integer diaryId) {
-    return exchangeQueryMapper.findComments(diaryId);
+  public List<FindCommentReplyLinkedUserDto> findCommentsReplies(Integer diaryId) {
+    return exchangeQueryMapper.findCommentsReplies(diaryId);
   }
 }

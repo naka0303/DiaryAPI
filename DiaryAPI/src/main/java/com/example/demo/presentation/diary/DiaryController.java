@@ -1,7 +1,9 @@
 package com.example.demo.presentation.diary;
 
 import com.example.demo.application.diary.dto.FindDiaryDto;
+import com.example.demo.application.diary.dto.FindDiaryLinkedUserDto;
 import com.example.demo.domain.diary.entity.Diary;
+import com.example.demo.domain.diary_linked_user.DiaryLinkedUserData;
 import com.example.demo.infrastructure.diary.request.RegisterDiaryRequest;
 import com.example.demo.infrastructure.diary.request.UpdateDiaryRequest;
 import com.example.demo.infrastructure.diary.service.DiaryCommandService;
@@ -38,12 +40,12 @@ public class DiaryController {
   @CrossOrigin("http://localhost:4200")
   public ResponseEntity<List<Diary>> findDiaries() throws Exception {
 
-    Diary diary = new Diary();
+    DiaryLinkedUserData data = new DiaryLinkedUserData();
 
-    List<FindDiaryDto> dtoList =
+    List<FindDiaryLinkedUserDto> dtoList =
         diaryQueryService.findDiaries();
 
-    return new ResponseEntity(diary.toEntityList(dtoList), HttpStatus.OK);
+    return new ResponseEntity(data.toEntityList(dtoList), HttpStatus.OK);
   }
 
   /**

@@ -1,6 +1,7 @@
 package com.example.demo.infrastructure.exchange.repository;
 
 import com.example.demo.application.exchange.dto.FindCommentLinkedUserDto;
+import com.example.demo.application.exchange.dto.FindCommentReplyLinkedUserDto;
 
 import java.util.List;
 
@@ -10,10 +11,10 @@ import java.util.List;
 public interface ExchangeQueryRepository {
 
     /**
-     * 指定された日記のコメントを全て取得
+     * 指定された日記のコメントを全て取得.
      *
      * @param diaryId 日記ID
      * @return コメント情報
      */
-    List<FindCommentLinkedUserDto> findComments(Integer diaryId);
+    List<FindCommentReplyLinkedUserDto> findCommentsReplies(Integer diaryId);
 }

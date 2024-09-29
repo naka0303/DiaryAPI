@@ -1,6 +1,7 @@
 package com.example.demo.infrastructure.diary.repository;
 
 import com.example.demo.application.diary.dto.FindDiaryDto;
+import com.example.demo.application.diary.dto.FindDiaryLinkedUserDto;
 import com.example.demo.domain.diary.entity.Diary;
 import com.example.demo.mapper.DiaryQueryMapper;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,7 @@ public class DiaryQueryRepositoryImpl implements DiaryQueryRepository {
    * @return 日記情報
    */
   @Override
-  public List<FindDiaryDto> findDiaries() {
+  public List<FindDiaryLinkedUserDto> findDiaries() {
     return diaryQueryMapper.selectDiaries();
   }
 }
